@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "962275669409",
+    "project_id": "hotel-booking-fb22c",
+    "storage_bucket": "hotel-booking-fb22c.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:962275669409:android:467126dc3aa4ff88eac7e0",
+        "android_client_info": {
+          "package_name": "com.example.hotelbooking"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBF8fJtX7UPK87e0w-lgqt0oAWMAz158FQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

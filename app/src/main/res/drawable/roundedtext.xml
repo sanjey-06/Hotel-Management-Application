@@ -1,0 +1,9 @@
+<!-- res/drawable/rounded_edittext_blue.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Darker transparent blue background -->
+    <solid android:color="#4D0077B6"/> <!-- #4D is the alpha for 30% opacity, and 0077B6 is the darker blue color -->
+    <!-- Rounded corners -->
+    <corners android:radius="16dp"/>
+    <!-- Border (optional) -->
+    <stroke android:color="#005C8D" android:width="2dp"/> <!-- Darker blue border color -->
+</shape>

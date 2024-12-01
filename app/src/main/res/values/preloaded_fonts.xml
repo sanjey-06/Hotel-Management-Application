@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="preloaded_fonts" translatable="false">
+        <item>@font/advent_pro</item>
+        <item>@font/advent_pro_extrabold</item>
+        <item>@font/advent_pro_medium</item>
+        <item>@font/alfa_slab_one</item>
+        <item>@font/arima_madurai_black</item>
+        <item>@font/baloo_chettan</item>
+    </array>
+</resources>

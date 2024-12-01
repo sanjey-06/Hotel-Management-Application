@@ -1,0 +1,214 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Title Text -->
+    <TextView
+        android:id="@+id/signup_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="85dp"
+        android:fontFamily="@font/advent_pro_extrabold"
+        android:text="Create Account"
+        android:textColor="@color/black"
+        android:textSize="40sp" />
+
+    <!-- Name Field -->
+
+    <!-- Last Name Field -->
+
+    <!-- Mobile Number Field -->
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="122dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/signup_title"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="94dp"
+        android:layout_marginBottom="541dp"
+        android:layout_toStartOf="@+id/textView"
+        android:fontFamily="@font/advent_pro_extrabold"
+        android:text="First Name"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/firstName"
+        android:layout_width="181dp"
+        android:layout_height="53dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="35dp"
+        android:layout_toStartOf="@+id/lastName"
+        android:background="@drawable/roundedtext"
+        android:hint="Enter your first name"
+        android:textColorHint="@color/white" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/signup_title"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="61dp"
+        android:layout_marginBottom="545dp"
+        android:fontFamily="@font/advent_pro_extrabold"
+        android:text="Last Name"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/lastName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="195dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginBottom="485dp"
+        android:background="@drawable/roundedtext"
+        android:hint="Enter your last name"
+        android:textColorHint="@color/white" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="146dp"
+        android:layout_marginTop="263dp"
+        android:layout_marginEnd="148dp"
+        android:fontFamily="@font/advent_pro_extrabold"
+        android:text="Mobile Number"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <!-- Email Field -->
+
+    <EditText
+        android:id="@+id/mobileNumber"
+        android:layout_width="289dp"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="305dp"
+        android:layout_marginEnd="63dp"
+        android:background="@drawable/roundedtext"
+        android:hint=" Enter your mobile number"
+        android:inputType="phone"
+        android:textColorHint="@color/white"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="369dp"
+        android:layout_marginEnd="195dp"
+        android:fontFamily="@font/advent_pro_extrabold"
+        android:text="Email"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <!-- Password Field -->
+    <EditText
+        android:id="@+id/email_input"
+        android:layout_width="289dp"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="408dp"
+        android:layout_marginEnd="65dp"
+        android:background="@drawable/roundedtext"
+        android:hint=" Enter your email"
+        android:inputType="textEmailAddress"
+        android:textColorHint="@color/white"
+        android:textSize="20sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="490dp"
+        android:layout_marginEnd="279dp"
+        android:fontFamily="@font/advent_pro_extrabold"
+        android:text="Password"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <!-- Confirm Password Field -->
+
+    <EditText
+        android:id="@+id/password_input"
+        android:layout_width="181dp"
+        android:layout_height="53dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="588dp"
+        android:layout_marginEnd="214dp"
+        android:layout_marginBottom="148dp"
+        android:background="@drawable/roundedtext"
+        android:hint=" Enter your password"
+        android:inputType="textPassword"
+        android:textColorHint="@color/white"
+        android:textSize="13sp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="657dp"
+        android:layout_marginEnd="31dp"
+        android:layout_marginBottom="215dp"
+        android:fontFamily="@font/advent_pro_extrabold"
+        android:text="Confirm Password"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <!-- Create Account Button -->
+
+    <EditText
+        android:id="@+id/confirmPassword_input"
+        android:layout_width="181dp"
+        android:layout_height="53dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="530dp"
+        android:layout_marginEnd="9dp"
+        android:background="@drawable/roundedtext"
+        android:hint=" Confirm your password"
+        android:inputType="textPassword"
+        android:textColorHint="@color/white"
+        android:textSize="13sp"/>
+
+    <Button
+        android:id="@+id/sign_up_button"
+        android:layout_width="108dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="600dp"
+        android:layout_marginEnd="145dp"
+        android:layout_marginBottom="77dp"
+        android:background="@drawable/roundedtext"
+        android:text="Create Account"
+        android:textAllCaps="false"
+        android:textSize="13sp" />
+
+</RelativeLayout>
