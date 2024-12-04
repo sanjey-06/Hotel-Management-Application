@@ -55,6 +55,8 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth")
     implementation ("com.google.firebase:firebase-auth-ktx:23.1.0")
+    implementation("com.google.android.material:material:1.9.0")
+    implementation("com.airbnb.android:lottie:6.6.1")
     implementation(libs.firebase.database.ktx)
     implementation(libs.firebase.database)
     testImplementation(libs.junit)

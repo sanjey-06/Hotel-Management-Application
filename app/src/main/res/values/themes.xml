@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.Hotelbooking" parent="android:Theme.Material.Light.NoActionBar" />
+    <!-- Default App Theme -->
+    <style name="Theme.Hotelbooking" parent="android:Theme.Material.Light.NoActionBar">
+        <!-- Add any additional customization for your main app theme here -->
+    </style>
+
 </resources>

@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Hotelbooking"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.Hotelbooking">
@@ -29,6 +29,9 @@
         <activity android:name=".SigninActivity"
             android:exported="true">
         </activity>
+
+
+
 
         <meta-data
             android:name="preloaded_fonts"

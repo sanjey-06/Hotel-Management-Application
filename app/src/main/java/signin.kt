@@ -23,7 +23,7 @@ class SigninActivity : ComponentActivity() {
         // Find the input fields and sign-up button
         val firstNameInput: EditText = findViewById(R.id.firstName)
         val lastNameInput: EditText = findViewById(R.id.lastName)
-        val mobileNumberInput: EditText = findViewById(R.id.mobileNumber)
+        val mobileNumberInput: EditText = findViewById(R.id.mobilenumber)
         val emailInput: EditText = findViewById(R.id.email_input)
         val passwordInput: EditText = findViewById(R.id.password_input)
         val confirmPasswordInput: EditText = findViewById(R.id.confirmPassword_input)
