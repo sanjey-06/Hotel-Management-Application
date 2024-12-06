@@ -1,72 +1,110 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white">
+    android:layout_height="match_parent">
 
-    <!-- Top Half: Image -->
+    <!-- ImageView at the top -->
     <ImageView
-        android:id="@+id/banner_image"
+        android:id="@+id/topImageView"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:src="@drawable/background3"
-        android:scaleType="centerCrop"
-        android:contentDescription="Banner Image" />
+        android:layout_height="600dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/background5" />
 
-    <!-- Bottom Half: Buttons -->
+    <!-- Logo at the top-left corner, over the ImageView -->
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="16dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/hotellogo"
+        android:contentDescription="Logo" />
+
+    <!-- Login Button, over the ImageView -->
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Login"
+        android:textSize="15sp"
+        android:fontFamily="@font/advent_pro_extrabold"
+        android:background="@android:color/transparent"
+        android:textColor="@color/black" />
+
+    <!-- Create Account Button, next to Login Button, over the ImageView -->
+    <Button
+        android:id="@+id/createAccountButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@id/loginButton"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="Create Account"
+        android:textSize="15sp"
+        android:fontFamily="@font/advent_pro_extrabold"
+        android:background="@android:color/transparent"
+        android:textColor="@color/black" />
+
+    <!-- Centered Button below the ImageView -->
+    <Button
+        android:id="@+id/centerButton"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/topImageView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Book Now"
+        android:background="@color/darkish_blue"
+        android:textColor="@color/white"
+        android:fontFamily="@font/advent_pro_extrabold"
+        android:textSize="30sp" />
+
+    <!-- Bottom Navbar with three buttons -->
     <LinearLayout
+        android:id="@+id/bottomNavbar"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:orientation="horizontal"
-        android:padding="16dp"
-        android:gravity="center">
+        android:background="@color/black">
 
-        <!-- Button 1: View Calendar -->
-
-        <!-- Button 2: Enter Occupants -->
-
+        <!-- Home Button -->
         <Button
-            android:id="@+id/view_calendar_button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="-80dp"
-            android:layout_weight="1"
-            android:backgroundTint="@color/teal_700"
-            android:text="View Calendar"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
-
-        <Button
-            android:id="@+id/enter_occupants_button"
+            android:id="@+id/navHome"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="-80dp"
-            android:layout_marginEnd="8dp"
-            android:backgroundTint="@color/teal_700"
-            android:text="Occupants"
+            android:text="Home"
             android:textColor="@color/white"
-            android:textAllCaps="false"
-            android:textSize="16sp" />
+            android:background="@color/teal_700" />
 
-        <!-- Button 3: Search -->
+        <!-- Bookings Button -->
         <Button
-            android:id="@+id/search_button"
+            android:id="@+id/navBookings"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="-80dp"
-            android:backgroundTint="@color/teal_700"
-            android:text="Search"
+            android:text="Bookings"
+            android:drawableEnd="@drawable/bookingicon"
             android:textColor="@color/white"
-            android:textAllCaps="false"
-            android:textSize="16sp" />
+            android:padding="16dp"
+            android:background="@color/darkish_blue" />
+
+        <!-- Settings Button -->
+        <Button
+            android:id="@+id/navSettings"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Settings"
+            android:textColor="@color/white"
+            android:background="@color/teal_700" />
     </LinearLayout>
-</LinearLayout>
+</RelativeLayout>

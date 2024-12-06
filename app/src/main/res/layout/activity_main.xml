@@ -1,136 +1,280 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent">-->
 
     <!-- Title Text -->
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="85dp"
-        android:fontFamily="@font/advent_pro_extrabold"
-        android:text="@string/app_name"
-        android:textColor="@color/black"
-        android:textSize="50sp" />
+<!--    <TextView-->
+<!--        android:id="@+id/title"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginTop="85dp"-->
+<!--        android:fontFamily="@font/advent_pro_extrabold"-->
+<!--        android:text="@string/app_name"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="50sp" />-->
 
-    <!-- Log In Text -->
-    <TextView
-        android:id="@+id/logInText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/title"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
-        android:fontFamily="@font/advent_pro_medium"
-        android:text="Log in"
-        android:textColor="@color/black"
-        android:textSize="40sp" />
+<!--    &lt;!&ndash; Log In Text &ndash;&gt;-->
+<!--    <TextView-->
+<!--        android:id="@+id/logInText"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/title"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginTop="50dp"-->
+<!--        android:fontFamily="@font/advent_pro_medium"-->
+<!--        android:text="Log in"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="40sp" />-->
 
-    <!-- Welcome Text -->
-    <TextView
-        android:id="@+id/welcomeText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/logInText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/advent_pro"
-        android:text="Welcome to the app"
-        android:textColor="@color/black"
-        android:textSize="25sp" />
+<!--    &lt;!&ndash; Welcome Text &ndash;&gt;-->
+<!--    <TextView-->
+<!--        android:id="@+id/welcomeText"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/logInText"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:fontFamily="@font/advent_pro"-->
+<!--        android:text="Welcome to the app"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="25sp" />-->
 
-    <!-- Email Label -->
-    <TextView
-        android:id="@+id/emailLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/welcomeText"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="42dp"
-        android:fontFamily="@font/advent_pro_extrabold"
-        android:text="Email"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
+<!--    &lt;!&ndash; Email Label &ndash;&gt;-->
+<!--    <TextView-->
+<!--        android:id="@+id/emailLabel"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/welcomeText"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:layout_marginStart="42dp"-->
+<!--        android:fontFamily="@font/advent_pro_extrabold"-->
+<!--        android:text="Email"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="20sp" />-->
 
-    <!-- Email Input -->
-    <EditText
-        android:id="@+id/emailInput"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_below="@id/emailLabel"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="42dp"
-        android:layout_marginEnd="42dp"
-        android:background="@drawable/roundedtext"
-        android:hint="   Enter your email"
-        android:textColorHint="@color/white" />
+<!--    &lt;!&ndash; Email Input &ndash;&gt;-->
+<!--    <EditText-->
+<!--        android:id="@+id/emailInput"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="48dp"-->
+<!--        android:layout_below="@id/emailLabel"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginStart="42dp"-->
+<!--        android:layout_marginEnd="42dp"-->
+<!--        android:background="@drawable/roundedtext"-->
+<!--        android:hint="   Enter your email"-->
+<!--        android:textColorHint="@color/white" />-->
 
-    <!-- Password Label -->
-    <TextView
-        android:id="@+id/passwordLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/emailInput"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="42dp"
-        android:fontFamily="@font/advent_pro_extrabold"
-        android:text="Password"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
+<!--    &lt;!&ndash; Password Label &ndash;&gt;-->
+<!--    <TextView-->
+<!--        android:id="@+id/passwordLabel"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/emailInput"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:layout_marginStart="42dp"-->
+<!--        android:fontFamily="@font/advent_pro_extrabold"-->
+<!--        android:text="Password"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="20sp" />-->
 
-    <!-- Password Input -->
-    <EditText
-        android:id="@+id/passwordInput"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_below="@id/passwordLabel"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="42dp"
-        android:layout_marginEnd="42dp"
-        android:background="@drawable/roundedtext"
-        android:hint="   Enter your password"
-        android:textColorHint="@color/white" />
+<!--    &lt;!&ndash; Password Input &ndash;&gt;-->
+<!--    <EditText-->
+<!--        android:id="@+id/passwordInput"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="48dp"-->
+<!--        android:layout_below="@id/passwordLabel"-->
+<!--        android:layout_marginStart="42dp"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:layout_marginEnd="42dp"-->
+<!--        android:background="@drawable/roundedtext"-->
+<!--        android:hint="   Enter your password"-->
+<!--        android:textColorHint="@color/white" />-->
 
-    <!-- Log In Button -->
-    <Button
-        android:id="@+id/logInButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/passwordInput"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/roundedtext"
-        android:text="Login"
-        android:textAllCaps="false" />
+<!--    &lt;!&ndash; Log In Button &ndash;&gt;-->
+<!--    <Button-->
+<!--        android:id="@+id/logInButton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/passwordInput"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginTop="20dp"-->
+<!--        android:background="@drawable/roundedtext"-->
+<!--        android:text="Login"-->
+<!--        android:textAllCaps="false" />-->
 
-    <!-- Register Text -->
-    <TextView
-        android:id="@+id/registerText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/logInButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/advent_pro_medium"
-        android:text="Are you new? Click to register"
-        android:textSize="20sp" />
+<!--    &lt;!&ndash; Register Text &ndash;&gt;-->
+<!--    <TextView-->
+<!--        android:id="@+id/registerText"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/logInButton"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginTop="30dp"-->
+<!--        android:fontFamily="@font/advent_pro_medium"-->
+<!--        android:text="Are you new? Click to register"-->
+<!--        android:textSize="20sp" />-->
 
-    <!-- Register Button -->
-    <Button
-        android:id="@+id/registerButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/registerText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/transparent"
-        android:fontFamily="@font/advent_pro_extrabold"
-        android:text="Here"
-        android:textSize="20sp"
-        android:textAllCaps="false" />
+<!--    &lt;!&ndash; Register Button &ndash;&gt;-->
+<!--    <Button-->
+<!--        android:id="@+id/registerButton"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@id/registerText"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        android:fontFamily="@font/advent_pro_extrabold"-->
+<!--        android:text="Here"-->
+<!--        android:textSize="20sp"-->
+<!--        android:textAllCaps="false" />-->
 
-</RelativeLayout>
+
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <EditText
+            android:id="@+id/passwordInput"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginTop="24dp"
+            android:background="@android:drawable/editbox_background"
+            android:drawableStart="@drawable/password"
+            android:drawablePadding="16dp"
+            android:ems="10"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textColorHint="@color/darkish_blue"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/emailInput" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="350dp"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/textView8"
+            app:srcCompat="@drawable/top_background1" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hello \nUser"
+            android:layout_marginStart="32dp"
+            android:textSize="40sp"
+            android:textStyle="bold"
+            android:textColor="@color/darkish_blue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+        <EditText
+            android:id="@+id/emailInput"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:drawableStart="@drawable/email"
+            android:drawablePadding="16dp"
+            android:hint="Email"
+            android:textColorHint="@color/darkish_blue"
+            android:textSize="18sp"
+            android:background="@android:drawable/editbox_background"
+            android:ems="10"
+            android:inputType="text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+        <Button
+            android:id="@+id/logInButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:background="@drawable/roundedtext"
+            android:textAllCaps="false"
+            android:layout_marginEnd="32dp"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/passwordInput" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="32dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/logInButton">
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/facebookbutton"
+                style="@android:style/Widget.Button"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/btn_background"
+                android:drawableEnd="@drawable/facebook"
+                android:padding="16dp"
+                android:text="Facebook"
+                android:textColor="@color/darkish_blue"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/googlebutton"
+                style="@android:style/Widget.Button"
+                android:layout_width="0dp"
+                android:layout_height="55dp"
+                android:layout_marginStart="8dp"
+                android:layout_weight="0.5"
+                android:background="@drawable/btn_background"
+                android:drawableEnd="@drawable/google"
+                android:padding="16dp"
+                android:text="Google"
+                android:textColor="@color/darkish_blue"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/registerButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Are you new user ? Register"
+            android:layout_marginTop="1dp"
+            android:textStyle="bold"
+            android:textColor="@color/darkish_blue"
+            android:textSize="16sp"
+            android:background="@android:color/transparent"
+            android:textAllCaps="false"
+            app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+            app:layout_constraintStart_toStartOf="@+id/linearLayout"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+<!--</RelativeLayout>-->

@@ -29,6 +29,9 @@
         <activity android:name=".SigninActivity"
             android:exported="true">
         </activity>
+        <activity android:name=".MainActivity"
+            android:exported="true">
+        </activity>
 
 
 

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.activity.ComponentActivity
@@ -38,6 +39,9 @@ class MainActivity : ComponentActivity() {
         val passwordInput: EditText = findViewById(R.id.passwordInput)
         val loginButton: Button = findViewById(R.id.logInButton)
         val registerButton: Button = findViewById(R.id.registerButton)
+        val imageView: ImageView = findViewById(R.id.imageView)
+
+        imageView.setImageResource(R.drawable.top_background1)
 
         // Handle Login button click
         loginButton.setOnClickListener {
