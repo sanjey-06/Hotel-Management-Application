@@ -24,6 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Homepage"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
             android:exported="true">
         </activity>
         <activity android:name=".SigninActivity"
@@ -32,6 +33,11 @@
         <activity android:name=".MainActivity"
             android:exported="true">
         </activity>
+        <activity android:name=".MyBookings"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+            android:exported="true">
+        </activity>
+        
 
 
 

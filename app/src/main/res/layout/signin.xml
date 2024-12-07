@@ -1,204 +1,432 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
-    <!-- Title Text -->
-    <TextView
-        android:id="@+id/signup_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="85dp"
-        android:fontFamily="@font/advent_pro_extrabold"
-        android:text="Create Account"
-        android:textColor="@color/black"
-        android:textSize="40sp" />
-
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/signup_title"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="19dp"
-        android:fontFamily="@font/advent_pro_extrabold"
-        android:text="First Name"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
-
-
-    <EditText
-        android:id="@+id/firstName"
-        android:layout_width="176dp"
-        android:layout_height="51dp"
-        android:layout_below="@+id/textView2"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="19dp"
-        android:background="@drawable/roundedtext"
-        android:hint="Enter your first name"
-        android:textColorHint="@color/white" />
-
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/signup_title"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="25dp"
-        android:layout_toEndOf="@+id/textView2"
-        android:fontFamily="@font/advent_pro_extrabold"
-        android:text="Last Name"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
 
     <EditText
         android:id="@+id/lastName"
-        android:layout_width="176dp"
-        android:layout_height="51dp"
-        android:layout_below="@+id/textView3"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="25dp"
-        android:layout_toEndOf="@+id/firstName"
-        android:background="@drawable/roundedtext"
-        android:hint="Enter your last name"
-        android:textColorHint="@color/white" />
-
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/firstName"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="19dp"
-        android:fontFamily="@font/advent_pro_extrabold"
-        android:text="Mobile number"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
-
+        android:layout_width="175dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:background="@android:drawable/editbox_background"
+        android:drawableStart="@drawable/name"
+        android:drawablePadding="16dp"
+        android:ems="10"
+        android:hint="Last Name"
+        android:inputType="text"
+        android:textColorHint="@color/darkish_blue"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <EditText
-        android:id="@+id/mobilenumber"
-        android:layout_width="176dp"
-        android:layout_height="51dp"
-        android:layout_below="@+id/textView4"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="19dp"
-        android:background="@drawable/roundedtext"
-        android:hint="Enter your mobile number"
-        android:textColorHint="@color/white" />
-
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/mobilenumber"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="19dp"
-        android:fontFamily="@font/advent_pro_extrabold"
-        android:text="Email"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
+        android:id="@+id/firstName"
+        android:layout_width="175dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:drawable/editbox_background"
+        android:drawableStart="@drawable/name"
+        android:drawablePadding="16dp"
+        android:ems="10"
+        android:hint="First Name"
+        android:inputType="text"
+        android:textColorHint="@color/darkish_blue"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toStartOf="@+id/lastName"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <EditText
         android:id="@+id/email_input"
-        android:layout_width="176dp"
-        android:layout_height="51dp"
-        android:layout_below="@+id/textView5"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="19dp"
-        android:background="@drawable/roundedtext"
-        android:hint="Enter your email address"
-        android:textColorHint="@color/white" />
-
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/email_input"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="19dp"
-        android:fontFamily="@font/advent_pro_extrabold"
-        android:text="Password"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
-
-
-    <EditText
-        android:id="@+id/password_input"
-        android:layout_width="176dp"
-        android:layout_height="51dp"
-        android:layout_below="@+id/textView6"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="19dp"
-        android:background="@drawable/roundedtext"
-        android:hint="Enter your password"
-        android:textColorHint="@color/white" />
-
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="170dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/signup_title"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="361dp"
-        android:layout_marginEnd="25dp"
-        android:layout_toEndOf="@+id/textView6"
-        android:fontFamily="@font/advent_pro_extrabold"
-        android:text="Confirm password"
-        android:textColor="@color/black"
-        android:textSize="20sp" />
-
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        android:background="@android:drawable/editbox_background"
+        android:drawableStart="@drawable/email"
+        android:drawablePadding="16dp"
+        android:ems="10"
+        android:hint="Enter your email"
+        android:inputType="text"
+        android:textColorHint="@color/darkish_blue"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mobilenumber" />
 
     <EditText
         android:id="@+id/confirmPassword_input"
-        android:layout_width="176dp"
-        android:layout_height="51dp"
-        android:layout_below="@+id/textView7"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="29dp"
-        android:layout_marginTop="19dp"
-        android:layout_marginEnd="25dp"
-        android:layout_toEndOf="@+id/firstName"
-        android:background="@drawable/roundedtext"
-        android:hint="Re enter the password"
-        android:textColorHint="@color/white" />
+        android:layout_width="175dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:background="@android:drawable/editbox_background"
+        android:drawableStart="@drawable/password"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="Confirm Password"
+        android:inputType="textPassword"
+        android:textColorHint="@color/darkish_blue"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/password_input"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email_input" />
 
+    <EditText
+        android:id="@+id/password_input"
+        android:layout_width="175dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:background="@android:drawable/editbox_background"
+        android:drawableStart="@drawable/password"
+        android:drawablePadding="16dp"
+        android:ems="10"
+        android:hint="Enter Password"
+        android:inputType="textPassword"
+        android:textColorHint="@color/darkish_blue"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/confirmPassword_input"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email_input" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="350dp"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textView8"
+        app:srcCompat="@drawable/top_background1" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create an \nAccount"
+        android:layout_marginStart="32dp"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        android:textColor="@color/darkish_blue"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <EditText
+        android:id="@+id/mobilenumber"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginEnd="32dp"
+        android:background="@android:drawable/editbox_background"
+        android:drawableStart="@drawable/name"
+        android:drawablePadding="16dp"
+        android:ems="10"
+        android:hint="Mobile Number"
+        android:inputType="text"
+        android:textColorHint="@color/darkish_blue"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <Button
         android:id="@+id/sign_up_button"
-        android:layout_width="176dp"
-        android:layout_height="51dp"
-        android:layout_below="@+id/textView3"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="126dp"
-        android:layout_marginTop="456dp"
-        android:layout_marginEnd="127dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="160dp"
         android:background="@drawable/roundedtext"
-        android:text="Register"
-        android:textColor="@color/white" />
+        android:text="Create "
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email_input" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sign_up_button">
 
 
-</RelativeLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/facebookbutton"
+            style="@android:style/Widget.Button"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/btn_background"
+            android:drawableEnd="@drawable/facebook"
+            android:padding="16dp"
+            android:text="Facebook"
+            android:textColor="@color/darkish_blue"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/googlebutton"
+            style="@android:style/Widget.Button"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/btn_background"
+            android:drawableEnd="@drawable/google"
+            android:padding="16dp"
+            android:text="Google"
+            android:textColor="@color/darkish_blue"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Already you have an account ? Login"
+        android:layout_marginTop="1dp"
+        android:textStyle="bold"
+        android:textColor="@color/darkish_blue"
+        android:textSize="16sp"
+        android:background="@android:color/transparent"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintStart_toStartOf="@+id/linearLayout"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent">-->
+
+
+<!--    &lt;!&ndash; Title Text &ndash;&gt;-->
+<!--    <TextView-->
+<!--        android:id="@+id/signup_title"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginTop="85dp"-->
+<!--        android:fontFamily="@font/advent_pro_extrabold"-->
+<!--        android:text="Create Account"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="40sp" />-->
+
+
+<!--    <TextView-->
+<!--        android:id="@+id/textView2"-->
+<!--        android:layout_width="170dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/signup_title"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_marginStart="25dp"-->
+<!--        android:layout_marginTop="19dp"-->
+<!--        android:fontFamily="@font/advent_pro_extrabold"-->
+<!--        android:text="First Name"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="20sp" />-->
+
+
+<!--    <EditText-->
+<!--        android:id="@+id/firstName"-->
+<!--        android:layout_width="176dp"-->
+<!--        android:layout_height="51dp"-->
+<!--        android:layout_below="@+id/textView2"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_marginStart="25dp"-->
+<!--        android:layout_marginTop="19dp"-->
+<!--        android:background="@drawable/roundedtext"-->
+<!--        android:hint="Enter your first name"-->
+<!--        android:textColorHint="@color/white" />-->
+
+
+<!--    <TextView-->
+<!--        android:id="@+id/textView3"-->
+<!--        android:layout_width="170dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/signup_title"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_marginStart="29dp"-->
+<!--        android:layout_marginTop="19dp"-->
+<!--        android:layout_marginEnd="25dp"-->
+<!--        android:layout_toEndOf="@+id/textView2"-->
+<!--        android:fontFamily="@font/advent_pro_extrabold"-->
+<!--        android:text="Last Name"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="20sp" />-->
+
+
+<!--    <EditText-->
+<!--        android:id="@+id/lastName"-->
+<!--        android:layout_width="176dp"-->
+<!--        android:layout_height="51dp"-->
+<!--        android:layout_below="@+id/textView3"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_marginStart="29dp"-->
+<!--        android:layout_marginTop="19dp"-->
+<!--        android:layout_marginEnd="25dp"-->
+<!--        android:layout_toEndOf="@+id/firstName"-->
+<!--        android:background="@drawable/roundedtext"-->
+<!--        android:hint="Enter your last name"-->
+<!--        android:textColorHint="@color/white" />-->
+
+
+<!--    <TextView-->
+<!--        android:id="@+id/textView4"-->
+<!--        android:layout_width="170dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/firstName"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_marginStart="25dp"-->
+<!--        android:layout_marginTop="19dp"-->
+<!--        android:fontFamily="@font/advent_pro_extrabold"-->
+<!--        android:text="Mobile number"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="20sp" />-->
+
+
+<!--    <EditText-->
+<!--        android:id="@+id/mobilenumber"-->
+<!--        android:layout_width="176dp"-->
+<!--        android:layout_height="51dp"-->
+<!--        android:layout_below="@+id/textView4"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_marginStart="25dp"-->
+<!--        android:layout_marginTop="19dp"-->
+<!--        android:background="@drawable/roundedtext"-->
+<!--        android:hint="Enter your mobile number"-->
+<!--        android:textColorHint="@color/white" />-->
+
+
+<!--    <TextView-->
+<!--        android:id="@+id/textView5"-->
+<!--        android:layout_width="170dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/mobilenumber"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_marginStart="25dp"-->
+<!--        android:layout_marginTop="19dp"-->
+<!--        android:fontFamily="@font/advent_pro_extrabold"-->
+<!--        android:text="Email"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="20sp" />-->
+
+<!--    <EditText-->
+<!--        android:id="@+id/email_input"-->
+<!--        android:layout_width="176dp"-->
+<!--        android:layout_height="51dp"-->
+<!--        android:layout_below="@+id/textView5"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_marginStart="25dp"-->
+<!--        android:layout_marginTop="19dp"-->
+<!--        android:background="@drawable/roundedtext"-->
+<!--        android:hint="Enter your email address"-->
+<!--        android:textColorHint="@color/white" />-->
+
+
+<!--    <TextView-->
+<!--        android:id="@+id/textView6"-->
+<!--        android:layout_width="170dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/email_input"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_marginStart="25dp"-->
+<!--        android:layout_marginTop="19dp"-->
+<!--        android:fontFamily="@font/advent_pro_extrabold"-->
+<!--        android:text="Password"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="20sp" />-->
+
+
+<!--    <EditText-->
+<!--        android:id="@+id/password_input"-->
+<!--        android:layout_width="176dp"-->
+<!--        android:layout_height="51dp"-->
+<!--        android:layout_below="@+id/textView6"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_marginStart="25dp"-->
+<!--        android:layout_marginTop="19dp"-->
+<!--        android:background="@drawable/roundedtext"-->
+<!--        android:hint="Enter your password"-->
+<!--        android:textColorHint="@color/white" />-->
+
+
+<!--    <TextView-->
+<!--        android:id="@+id/textView7"-->
+<!--        android:layout_width="170dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_below="@+id/signup_title"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_marginStart="29dp"-->
+<!--        android:layout_marginTop="361dp"-->
+<!--        android:layout_marginEnd="25dp"-->
+<!--        android:layout_toEndOf="@+id/textView6"-->
+<!--        android:fontFamily="@font/advent_pro_extrabold"-->
+<!--        android:text="Confirm password"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:textSize="20sp" />-->
+
+
+<!--    <EditText-->
+<!--        android:id="@+id/confirmPassword_input"-->
+<!--        android:layout_width="176dp"-->
+<!--        android:layout_height="51dp"-->
+<!--        android:layout_below="@+id/textView7"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_marginStart="29dp"-->
+<!--        android:layout_marginTop="19dp"-->
+<!--        android:layout_marginEnd="25dp"-->
+<!--        android:layout_toEndOf="@+id/firstName"-->
+<!--        android:background="@drawable/roundedtext"-->
+<!--        android:hint="Re enter the password"-->
+<!--        android:textColorHint="@color/white" />-->
+
+
+<!--    <Button-->
+<!--        android:id="@+id/sign_up_button"-->
+<!--        android:layout_width="176dp"-->
+<!--        android:layout_height="51dp"-->
+<!--        android:layout_below="@+id/textView3"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_marginStart="126dp"-->
+<!--        android:layout_marginTop="456dp"-->
+<!--        android:layout_marginEnd="127dp"-->
+<!--        android:background="@drawable/roundedtext"-->
+<!--        android:text="Register"-->
+<!--        android:textColor="@color/white" />-->
+
+
+<!--</RelativeLayout>-->
+
+
+
