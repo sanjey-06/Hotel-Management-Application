@@ -1,0 +1,51 @@
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- ImageView for Room Image -->
+    <ImageView
+        android:id="@+id/roomImage"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:contentDescription="Room Image" />
+
+    <!-- TextView for Room Name -->
+    <TextView
+        android:id="@+id/roomName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Room Name"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:paddingTop="8dp" />
+
+    <!-- TextView for Room ID (Newly Added) -->
+    <TextView
+        android:id="@+id/roomId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Room ID"
+        android:textColor="@android:color/darker_gray"
+        android:paddingTop="4dp" />
+
+    <!-- TextView for Room Price -->
+    <TextView
+        android:id="@+id/roomPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Price"
+        android:textColor="@color/darkish_blue"
+        android:paddingTop="4dp" />
+
+    <!-- TextView for Room Description -->
+    <TextView
+        android:id="@+id/roomDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:paddingTop="4dp" />
+</LinearLayout>
