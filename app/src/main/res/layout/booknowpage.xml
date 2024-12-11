@@ -1,0 +1,133 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <ImageView
+        android:id="@+id/logoImageView"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="16dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/hotellogo"
+        android:contentDescription="Logo" />
+
+    <Button
+        android:id="@+id/loginButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="Login"
+        android:textSize="15sp"
+        android:background="@android:color/transparent"
+        android:textColor="@color/black" />
+
+    <Button
+        android:id="@+id/createAccountButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toStartOf="@id/loginButton"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="Create Account"
+        android:textSize="15sp"
+        android:background="@android:color/transparent"
+        android:textColor="@color/black" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/datePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginTop="171dp"
+        android:layout_marginEnd="235dp"
+        android:text="Choose the dates"
+        android:textAllCaps="false"
+        android:padding="16dp"
+        android:background="@drawable/btn_background"
+        android:textSize="16dp"
+        app:backgroundTint="@color/darkish_blue" />
+
+    <TextView
+        android:id="@+id/selectedDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="182dp"
+        android:layout_marginEnd="35dp"
+        android:padding="16dp"
+        android:background="@android:drawable/editbox_background"
+        android:hint="Selected Date Range"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/occupants"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="312dp"
+        android:layout_marginEnd="266dp"
+        android:background="@drawable/btn_background"
+        android:padding="16dp"
+        android:text="Click Here"
+        app:backgroundTint="@color/darkish_blue" />
+
+    <TextView
+        android:id="@+id/selectedOccupants"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="320dp"
+        android:layout_marginEnd="15dp"
+        android:background="@android:drawable/editbox_background"
+        android:hint="Selected number of occupants"
+        android:padding="16dp"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/searchbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="465dp"
+        android:layout_marginEnd="164dp"
+        android:text="Search"
+        app:backgroundTint="@color/darkish_blue"
+        android:padding="16dp"
+        android:background="@drawable/btn_background"
+        android:textSize="15sp" />
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomnavbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+
+        android:background="@color/teal_200"
+        app:menu="@menu/bottom_navigation_menu" />
+
+</RelativeLayout>
