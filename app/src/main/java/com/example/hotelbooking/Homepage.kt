@@ -1,13 +1,16 @@
 package com.example.hotelbooking
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.PopupMenu
 import android.widget.Toast
+import android.widget.VideoView
 import androidx.activity.ComponentActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -23,10 +26,62 @@ class Homepage : ComponentActivity() {
 
         val createAccountButton: Button = findViewById(R.id.createAccountButton)
         val loginButton: Button = findViewById(R.id.loginButton)
+        val centerButton: Button = findViewById(R.id.centerButton)
+        val videoView: VideoView = findViewById(R.id.topVideoView)
+
+// Get the dimensions of the device screen
+        val displayMetrics = resources.displayMetrics
+        val width = displayMetrics.widthPixels
+        val height = displayMetrics.heightPixels
+
+// Update the layout parameters of the VideoView to match the screen size
+        val layoutParams = videoView.layoutParams
+        layoutParams.width = width
+        layoutParams.height = height
+        videoView.layoutParams = layoutParams
+        // Set the video path or URI
+        val videoUri =
+            Uri.parse("android.resource://$packageName/raw/homepagevideo")
+        videoView.setVideoURI(videoUri)
+
+        // Start the video
+        videoView.setOnPreparedListener { mediaPlayer ->
+            mediaPlayer.isLooping = true // Loop the video
+            videoView.start()
+
+        }
+        // Navigate to Book Now Page
+        centerButton.setOnClickListener{
+            navigateToBooknowpage()
+        }
 
         // Initialize Firebase
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().reference
+
+
+        // BottomNavigationView setup
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomnavbar)
+        bottomNavigationView.selectedItemId = R.id.page_1 // Highlight "Home"
+
+        // Handle navigation item selection
+        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.page_1 -> {
+                    // Stay on Homepage
+                    true
+                }
+                R.id.page_2 -> {
+                    // Redirect to MyBookings activity
+                    val intent = Intent(this, MyBookings::class.java)
+                    startActivity(intent)
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+                    finish() // Close current activity
+                    true
+                }
+                else -> false
+            }
+        }
 
         // Check if the user is logged in and confirm its validity
         val currentUser = auth.currentUser
@@ -53,6 +108,12 @@ class Homepage : ComponentActivity() {
                 showPopupMenu(loginButton)
             }
         }
+    }
+
+
+    private fun navigateToBooknowpage() {
+        val intent = Intent(this,Booknowpage::class.java)
+        startActivity(intent)
     }
 
     private fun confirmUserLoggedInAndFetchName(userId: String, loginButton: Button, createAccountButton: Button) {

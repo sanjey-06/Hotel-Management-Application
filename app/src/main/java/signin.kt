@@ -72,8 +72,11 @@ class SigninActivity : ComponentActivity() {
 
         // Google Sign-In Button click listener
         googleSignInButton.setOnClickListener {
-            val signInIntent = googleSignInClient.signInIntent
-            startActivityForResult(signInIntent, RC_SIGN_IN)
+            // Sign out any previously signed-in Google account
+            GoogleSignIn.getClient(this, gso).signOut().addOnCompleteListener {
+                val signInIntent = googleSignInClient.signInIntent
+                startActivityForResult(signInIntent, RC_SIGN_IN)
+            }
         }
     }
 

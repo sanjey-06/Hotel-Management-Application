@@ -1,110 +1,76 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- ImageView at the top -->
-    <ImageView
-        android:id="@+id/topImageView"
+    <!-- VideoView for playing the video -->
+    <VideoView
+        android:id="@+id/topVideoView"
         android:layout_width="match_parent"
-        android:layout_height="600dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/background5" />
+        android:layout_height="match_parent" />
 
-    <!-- Logo at the top-left corner, over the ImageView -->
-    <ImageView
-        android:id="@+id/logoImageView"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_margin="16dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/hotellogo"
-        android:contentDescription="Logo" />
-
-    <!-- Login Button, over the ImageView -->
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="wrap_content"
+    <!-- Overlay layout for buttons on top of the VideoView -->
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="Login"
-        android:textSize="15sp"
-        android:fontFamily="@font/advent_pro_extrabold"
-        android:background="@android:color/transparent"
-        android:textColor="@color/black" />
+        android:background="@android:color/transparent">
 
-    <!-- Create Account Button, next to Login Button, over the ImageView -->
-    <Button
-        android:id="@+id/createAccountButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toStartOf="@id/loginButton"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:text="Create Account"
-        android:textSize="15sp"
-        android:fontFamily="@font/advent_pro_extrabold"
-        android:background="@android:color/transparent"
-        android:textColor="@color/black" />
+        <ImageView
+            android:id="@+id/logoImageView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_margin="16dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:src="@drawable/hotellogo"
+            android:contentDescription="Logo" />
 
-    <!-- Centered Button below the ImageView -->
+        <Button
+            android:id="@+id/loginButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:text="Login"
+            android:textSize="15sp"
+            android:background="@android:color/transparent"
+            android:textColor="@color/black" />
+
+        <Button
+            android:id="@+id/createAccountButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toStartOf="@id/loginButton"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:text="Create Account"
+            android:textSize="15sp"
+            android:background="@android:color/transparent"
+            android:textColor="@color/black" />
+    </RelativeLayout>
+
+    <!-- Center Button over the video -->
     <Button
         android:id="@+id/centerButton"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/topImageView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
+        android:layout_gravity="center"
         android:text="Book Now"
-        android:background="@color/darkish_blue"
-        android:textColor="@color/white"
+        android:background="@android:color/transparent"
         android:fontFamily="@font/advent_pro_extrabold"
+        android:textColor="@color/white"
         android:textSize="30sp" />
 
-    <!-- Bottom Navbar with three buttons -->
-    <LinearLayout
-        android:id="@+id/bottomNavbar"
+    <!-- Bottom Navigation Bar over the VideoView -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomnavbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:orientation="horizontal"
-        android:background="@color/black">
+        android:layout_gravity="bottom"
+        android:background="@color/darkish_blue"
+        app:menu="@menu/bottom_navigation_menu" />
 
-        <!-- Home Button -->
-        <Button
-            android:id="@+id/navHome"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Home"
-            android:textColor="@color/white"
-            android:background="@color/teal_700" />
-
-        <!-- Bookings Button -->
-        <Button
-            android:id="@+id/navBookings"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Bookings"
-            android:drawableEnd="@drawable/bookingicon"
-            android:textColor="@color/white"
-            android:padding="16dp"
-            android:background="@color/darkish_blue" />
-
-        <!-- Settings Button -->
-        <Button
-            android:id="@+id/navSettings"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Settings"
-            android:textColor="@color/white"
-            android:background="@color/teal_700" />
-    </LinearLayout>
-</RelativeLayout>
+</FrameLayout>
