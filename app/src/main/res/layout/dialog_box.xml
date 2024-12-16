@@ -20,17 +20,18 @@
         android:padding="8dp" />
 
     <!-- RecyclerView for CounterAdapter -->
+
+    <!-- Close Button -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/occupants_list_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:backgroundTint="@color/darkish_blue"
         android:divider="@android:color/darker_gray"
         android:dividerHeight="1dp"
-        android:padding="8dp"
-        android:backgroundTint="@color/darkish_blue"/>
+        android:padding="8dp" />
 
-    <!-- Close Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/close_button"
         android:layout_width="wrap_content"

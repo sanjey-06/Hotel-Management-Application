@@ -1,10 +1,17 @@
 package com.example.hotelbooking
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Room(
-    val id: Int = 0,
-    val name: String = "",
-    val maxoccupants: Int = 0,
-    val price: Int = 0,
-    val bookings: String = "", // We can leave this as a String, or you can modify if it's used
-    val imageURL: String = "" // Add imageUrl property
-)
+    val id: Int,
+    val name: String,
+    val maxoccupants: Int,
+    val price: Int,
+    val bookings: String,
+    val imageURL: String,
+    var numberofoccupants: Int = 0,
+    var numberofrooms: Int = 1 // Default value
+) : Parcelable
+

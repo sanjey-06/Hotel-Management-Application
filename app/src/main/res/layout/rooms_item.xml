@@ -23,22 +23,13 @@
         android:textSize="16sp"
         android:paddingTop="8dp" />
 
-    <!-- TextView for Room ID (Newly Added) -->
+    <!-- TextView for Room ID -->
     <TextView
         android:id="@+id/roomId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Room ID"
         android:textColor="@android:color/darker_gray"
-        android:paddingTop="4dp" />
-
-    <!-- TextView for Room Price -->
-    <TextView
-        android:id="@+id/roomPrice"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Price"
-        android:textColor="@color/darkish_blue"
         android:paddingTop="4dp" />
 
     <!-- TextView for Room Description -->
@@ -48,4 +39,64 @@
         android:layout_height="wrap_content"
         android:text="Description"
         android:paddingTop="4dp" />
+
+    <!-- Horizontal Layout for Price and Book Now Button -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingTop="8dp">
+
+        <!-- Room Price -->
+        <TextView
+            android:id="@+id/roomPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Price"
+            android:textColor="@color/darkish_blue"
+            android:layout_weight="1"
+            android:paddingEnd="8dp"
+            android:textStyle="bold"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <!-- FAB for Decrement and Increment -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingTop="8dp">
+
+        <!-- Decrement FAB -->
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/decrementRoomButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/minusicon"
+        android:contentDescription="Decrement Room" />
+
+        <!-- Room Quantity Display -->
+        <TextView
+            android:id="@+id/roomQuantity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+        android:textSize="16sp"
+        android:padding="16dp"
+        android:textStyle="bold"
+        android:gravity="center" />
+
+        <!-- Increment FAB -->
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/incrementRoomButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/plusicon"
+        android:contentDescription="Increment Room" />
+
+    </LinearLayout>
+
 </LinearLayout>
