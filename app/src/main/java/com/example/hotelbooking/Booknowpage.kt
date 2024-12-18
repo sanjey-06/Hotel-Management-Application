@@ -70,6 +70,10 @@ class Booknowpage : AppCompatActivity() {
         val createAccountButton: Button = findViewById(R.id.createAccountButton)
         val loginButton: Button = findViewById(R.id.loginButton)
 
+        // Calculate the number of occupants (adults + children)
+        val numberofoccupants = adults + children
+
+
 
         // BottomNavigationView setup
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomnavbar)
@@ -123,6 +127,13 @@ class Booknowpage : AppCompatActivity() {
             }
         }
     }
+
+//
+//    private fun navigateToPaymentPage() {
+//        val numberofoccupants = adults + children  // Calculate the total number of occupants
+//        val intent = Intent(this, Paymentpage::class.java)
+//        intent.putExtra("numberofoccupants", numberofoccupants) // Pass the total number of occupants
+//    }
 
     private fun validateInputs(): Boolean {
         if (startDate.isNullOrEmpty() || endDate.isNullOrEmpty()) {

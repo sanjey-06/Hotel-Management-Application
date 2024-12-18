@@ -33,8 +33,7 @@ class Paymentpage : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.paymentpage)
 
-        // Initialize Google Pay API client
-        paymentsClient = createPaymentsClient()
+
 
         // TextView to display room price
         roomPriceTextView = findViewById(R.id.room_price_text)
@@ -42,15 +41,28 @@ class Paymentpage : AppCompatActivity() {
         // Get room price from the Intent passed
         fetchRoomPriceFromIntent()
 
+        Log.d("CheckPayment", "Total Price:$totalPrice ")
         // Retrieve other necessary values from the intent
         retrieveBookingDetails()
+        // Initialize Google Pay API client
+        paymentsClient = createPaymentsClient()
 
-        // Display the total price in the UI
-        roomPriceTextView.text = "Total Price: $$totalPrice"
+        Log.d("PaymentPage3", "ROOM_ID: $roomId")
+        Log.d("PaymentPage3", "ROOM_TYPE: $name")
+        Log.d("PaymentPage3", "DATES: $startDate to $endDate")
+        Log.d("PaymentPage3", "ROOM_IMAGE_URL: $roomImageURL")
+        Log.d("PaymentPage3", "NUMBER_OF_OCCUPANTS: $numberofoccupants")
+        Log.d("PaymentPage3", "NUMBER_OF_ROOMS: $numberofrooms")
+
+        //val numberofoccupants = intent.getIntExtra("numberofoccupants", 0) // Default value is 0
+        Log.d("Numberofoccupantss", "NumberofOccupantscheck:$numberofoccupants")
+
+
+
 
         // Check if Google Pay is available
         checkGooglePayAvailability()
-
+        Log.d("CheckPayment", "Total Pssrice:$totalPrice ")
         // Set up the button click listener
         val payButton: Button = findViewById(R.id.googlepaybutton)
         payButton.setOnClickListener {
@@ -78,6 +90,8 @@ class Paymentpage : AppCompatActivity() {
 
             // Calculate the total price
             totalPrice = calculateTotalPrice(selectedRooms)
+            // Display the total price in the UI
+            roomPriceTextView.text = "Total Price: $$totalPrice"
 
             Log.d("RoomDetails", "Total price for selected rooms: $totalPrice")
         } else {
@@ -87,17 +101,28 @@ class Paymentpage : AppCompatActivity() {
 
     // Retrieve booking details passed from the previous page
     private fun retrieveBookingDetails() {
-        roomId = intent.getIntExtra("ROOM_ID", 0) // Get the room ID
-        name = intent.getStringExtra("ROOM_NAME") // Get the room type
-        maxOccupants = intent.getIntExtra("MAX_OCCUPANTS", 0) // Get max occupants
-        roomImageURL = intent.getStringExtra("ROOM_IMAGE_URL") // Get room image URL
-        startDate = intent.getStringExtra("START_DATE") // Get start date
-        endDate = intent.getStringExtra("END_DATE") // Get end date
-        numberofoccupants = intent.getIntExtra("NUMBER_OF_OCCUPANTS", 1)
-        numberofrooms = intent.getIntExtra("NUMBER_OF_ROOMS", 1)
+        // Retrieve the list of selected rooms from the intent
+        val selectedRooms: ArrayList<Room>? = intent.getParcelableArrayListExtra("selectedRooms")
 
-        Log.d("Paymentpage", "Room ID: $roomId, Room Type: $name, Max Occupants: $maxOccupants, Start Date: $startDate, End Date: $endDate, Room Image URL: $roomImageURL")
+        // Ensure the list is not null or empty
+        if (selectedRooms != null && selectedRooms.isNotEmpty()) {
+            val room = selectedRooms[0] // Assuming you are working with the first selected room
+            roomId = room.id // Get the room ID
+            name = room.name // Get the room type
+            maxOccupants = room.maxoccupants // Get max occupants
+            roomImageURL = room.imageURL // Get room image URL
+        }
+
+        // Retrieve other booking details
+        startDate = intent.getStringExtra("startDate") // Get start date
+        endDate = intent.getStringExtra("endDate") // Get end date
+        numberofoccupants = intent.getIntExtra("numberofoccupants", 1) // Default value: 1
+        numberofrooms = intent.getIntExtra("NUMBER_OF_ROOMS", 1) // Default value: 1
+        Log.d("Checck", "CheckNumber: $numberofoccupants ")
     }
+
+
+
 
     // Calculate total price by multiplying room price with number of rooms
     private fun calculateTotalPrice(selectedRooms: ArrayList<Room>): Double {
@@ -129,6 +154,7 @@ class Paymentpage : AppCompatActivity() {
     }
 
     private fun requestPayment() {
+        Log.d("CheckPayment", "Check payment: $totalPrice ")
         val paymentDataRequestJson = getPaymentDataRequest()
         if (paymentDataRequestJson == null) return
 
@@ -183,10 +209,22 @@ class Paymentpage : AppCompatActivity() {
             val intent = Intent(this, MyBookings::class.java)
             intent.putExtra("ROOM_ID", roomId)
             intent.putExtra("ROOM_TYPE", name)
-            intent.putExtra("DATES", "$startDate to $endDate")
+            intent.putExtra("START_DATE", startDate)  // Pass startDate
+            intent.putExtra("END_DATE", endDate)      // Pass endDate
             intent.putExtra("ROOM_IMAGE_URL", roomImageURL)
-            intent.putExtra("NUMBER_OF_OCCUPANTS", numberofoccupants)
+            intent.putExtra("numberofoccupants", numberofoccupants)
             intent.putExtra("NUMBER_OF_ROOMS", numberofrooms)
+
+
+            Log.d("PaymentPage1", "ROOM_ID: $roomId")
+            Log.d("PaymentPage1", "ROOM_TYPE: $name")
+            Log.d("PaymentPage1", "DATES: $startDate to $endDate")
+            Log.d("PaymentPage1", "ROOM_IMAGE_URL: $roomImageURL")
+            Log.d("PaymentPage1", "NUMBER_OF_OCCUPANTS: $numberofoccupants")
+            Log.d("PaymentPage1", "NUMBER_OF_ROOMS: $numberofrooms")
+
+
+
             startActivity(intent)
             finish()
         }

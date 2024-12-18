@@ -94,8 +94,40 @@ class MainActivity : ComponentActivity() {
                     Log.d(TAG, "signInWithEmail:success")
                     Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show()
 
-                    // Navigate to HomePageActivity (Main App)
-                    navigateToHomePage()
+                    // Retrieve the flag passed in the Intent to check the source
+                    val isComingFromBookNow = intent.getBooleanExtra("isComingFromBookNow", false)
+
+                    // Retrieve the booking details (only if coming from BookNow)
+                    val startDate = intent.getStringExtra("startDate")
+                    val endDate = intent.getStringExtra("endDate")
+                    val rooms = intent.getIntExtra("rooms", 0)
+                    val adults = intent.getIntExtra("adults", 0)
+                    val children = intent.getIntExtra("children", 0)
+                    val totalPrice = intent.getDoubleExtra("totalPrice", 0.0)
+                    val selectedRooms: ArrayList<Room>? = intent.getParcelableArrayListExtra("selectedRooms")
+
+
+                    if (isComingFromBookNow) {
+                        // If the login is coming from BookNow, navigate to PaymentPage
+                        val paymentIntent = Intent(this, Paymentpage::class.java).apply {
+                            putExtra("startDate", startDate)
+                            putExtra("endDate", endDate)
+                            putExtra("rooms", rooms)
+                            putExtra("adults", adults)
+                            putExtra("children", children)
+                            putExtra("totalPrice",totalPrice)
+                            putParcelableArrayListExtra("selectedRooms",
+                                selectedRooms?.let { ArrayList(it) })
+
+                            Log.d("TotalPrice", "Total Price from Intent: ${intent.getDoubleExtra("totalPrice", 0.0)}")
+
+                        }
+                        startActivity(paymentIntent)
+                        finish()  // Optionally finish MainActivity to prevent going back
+                    } else {
+                        // If the login is not coming from BookNow, navigate to Homepage
+                        navigateToHomePage()
+                    }
                 } else {
                     // Login failed
                     Log.w(TAG, "signInWithEmail:failure", task.exception)
@@ -120,7 +152,40 @@ class MainActivity : ComponentActivity() {
                                 // User exists in the database, navigate to homepage
                                 Log.d(TAG, "signInWithCredential:success")
                                 Toast.makeText(this, "Google Sign-In successful!", Toast.LENGTH_SHORT).show()
-                                navigateToHomePage()
+
+                                // Retrieve the flag passed in the Intent
+                                val isComingFromBookNow = intent.getBooleanExtra("isComingFromBookNow", false)
+
+                                // Retrieve the booking details (only if coming from BookNow)
+                                val startDate = intent.getStringExtra("startDate")
+                                val endDate = intent.getStringExtra("endDate")
+                                val rooms = intent.getIntExtra("rooms", 0)
+                                val adults = intent.getIntExtra("adults", 0)
+                                val children = intent.getIntExtra("children", 0)
+                                val totalPrice = intent.getDoubleExtra("totalPrice",1.0)
+                                val selectedRooms: ArrayList<Room>? = intent.getParcelableArrayListExtra("selectedRooms")
+
+                                if (isComingFromBookNow) {
+                                    // Navigate to PaymentPage if coming from BookNow
+                                    val paymentIntent = Intent(this, Paymentpage::class.java).apply {
+                                        putExtra("startDate", startDate)
+                                        putExtra("endDate", endDate)
+                                        putExtra("rooms", rooms)
+                                        putExtra("adults", adults)
+                                        putExtra("children", children)
+                                        putExtra("totalPrice", totalPrice)
+                                        putParcelableArrayListExtra("selectedRooms",
+                                            selectedRooms?.let { ArrayList(it) })
+                                        //Log.d("TotalPrice", "Total Price from Intent: ${intent.getDoubleExtra("totalPrice", 1.0)}")
+
+                                    }
+                                    startActivity(paymentIntent)
+                                    finish()
+
+                                } else {
+                                    // Navigate to Homepage if not coming from BookNow
+                                    navigateToHomePage()
+                                }
                             } else {
                                 // User does not exist in the database, show error message
                                 Log.w(TAG, "signInWithCredential:failure", task.exception)
