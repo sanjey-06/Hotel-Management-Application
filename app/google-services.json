@@ -13,7 +13,20 @@
           "package_name": "com.example.hotelbooking"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "962275669409-5s7tm5j3n40p41lkem2gtbrnmu6hecoh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.hotelbooking",
+            "certificate_hash": "e4ed11aa4c5ba19f6d6d632d9905bf6b415b632b"
+          }
+        },
+        {
+          "client_id": "962275669409-1b5bo1qhicueadbhi21ektmdda5chn82.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBF8fJtX7UPK87e0w-lgqt0oAWMAz158FQ"
@@ -21,7 +34,49 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "962275669409-1b5bo1qhicueadbhi21ektmdda5chn82.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:962275669409:android:1f14f70cb2a57bc7eac7e0",
+        "android_client_info": {
+          "package_name": "com.example.staffapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "962275669409-r4aeaoct7qgnvu2do014gjdvrsvqear0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.staffapplication",
+            "certificate_hash": "46ac8027e0bcc9d0b93dc70d97c95af72b06b089"
+          }
+        },
+        {
+          "client_id": "962275669409-1b5bo1qhicueadbhi21ektmdda5chn82.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBF8fJtX7UPK87e0w-lgqt0oAWMAz158FQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "962275669409-1b5bo1qhicueadbhi21ektmdda5chn82.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

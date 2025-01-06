@@ -1,0 +1,27 @@
+<!-- dialog_complaint.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Complaint text input field -->
+    <EditText
+        android:id="@+id/complaint_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter your complaint"
+        android:inputType="textMultiLine"
+        android:minHeight="150dp"
+        android:padding="16dp"
+        android:gravity="top|start"/>
+
+    <!-- Send button -->
+    <Button
+        android:id="@+id/send_complaint_button"
+        android:background="@drawable/roundedtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send" />
+
+</LinearLayout>

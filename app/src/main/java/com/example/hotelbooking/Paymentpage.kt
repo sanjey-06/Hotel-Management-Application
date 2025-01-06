@@ -39,7 +39,6 @@ class Paymentpage : AppCompatActivity() {
         setContentView(R.layout.paymentpage)
 
 
-
         // TextView to display room price
         roomPriceTextView = findViewById(R.id.room_price_text)
 
@@ -61,8 +60,6 @@ class Paymentpage : AppCompatActivity() {
 
         //val numberofoccupants = intent.getIntExtra("numberofoccupants", 0) // Default value is 0
         Log.d("Numberofoccupantss", "NumberofOccupantscheck:$numberofoccupants")
-
-
 
 
         // Check if Google Pay is available
@@ -100,33 +97,34 @@ class Paymentpage : AppCompatActivity() {
 
             Log.d("RoomDetails", "Total price for selected rooms: $totalPrice")
         } ?: run {
-            Toast.makeText(this, "Failed to fetch room price from intent", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Failed to fetch room price from intent", Toast.LENGTH_SHORT)
+                .show()
         }
     }
 
-            // Retrieve booking details passed from the previous page
-            // Retrieve booking details passed from the previous page
-            private fun retrieveBookingDetails() {
-                // Retrieve the list of selected rooms from the intent
-                selectedRooms = intent.getParcelableArrayListExtra("selectedRooms")
+    // Retrieve booking details passed from the previous page
+    // Retrieve booking details passed from the previous page
+    private fun retrieveBookingDetails() {
+        // Retrieve the list of selected rooms from the intent
+        selectedRooms = intent.getParcelableArrayListExtra("selectedRooms")
 
-                // Ensure the list is not null or empty
-                selectedRooms?.let { rooms ->
-                    val room = rooms[0] // Assuming you are working with the first selected room
-                    roomId = room.id // Get the room ID
-                    name = room.name // Get the room type
-                    maxOccupants = room.maxoccupants // Get max occupants
-                    roomImageURL = room.imageURL // Get room image URL
-                }
+        // Ensure the list is not null or empty
+        selectedRooms?.let { rooms ->
+            val room = rooms[0] // Assuming you are working with the first selected room
+            roomId = room.id // Get the room ID
+            name = room.name // Get the room type
+            maxOccupants = room.maxoccupants // Get max occupants
+            roomImageURL = room.imageURL // Get room image URL
+        }
 
-                // Retrieve other booking details
-                startDate = intent.getStringExtra("startDate") // Get start date
-                endDate = intent.getStringExtra("endDate") // Get end date
-                numberofoccupants = intent.getIntExtra("numberofoccupants", 1) // Default value: 1
-                numberofrooms = intent.getIntExtra("NUMBER_OF_ROOMS", 1) // Default value: 1
+        // Retrieve other booking details
+        startDate = intent.getStringExtra("startDate") // Get start date
+        endDate = intent.getStringExtra("endDate") // Get end date
+        numberofoccupants = intent.getIntExtra("numberofoccupants", 1) // Default value: 1
+        numberofrooms = intent.getIntExtra("NUMBER_OF_ROOMS", 1) // Default value: 1
 
-                Log.d("Checck", "CheckNumber: $numberofoccupants ")
-            }
+        Log.d("Checck", "CheckNumber: $numberofoccupants ")
+    }
 
 
     // Calculate total price by multiplying room price with number of rooms
@@ -150,7 +148,8 @@ class Paymentpage : AppCompatActivity() {
                     if (task.getResult(ApiException::class.java) == true) {
                         findViewById<Button>(R.id.googlepaybutton).isEnabled = true
                     } else {
-                        Toast.makeText(this, "Google Pay is not available", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, "Google Pay is not available", Toast.LENGTH_LONG)
+                            .show()
                     }
                 } catch (e: ApiException) {
                     e.printStackTrace()
@@ -171,7 +170,11 @@ class Paymentpage : AppCompatActivity() {
         )
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: android.content.Intent?) {
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: android.content.Intent?
+    ) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
             loadPaymentDataRequestCode -> {
@@ -182,17 +185,21 @@ class Paymentpage : AppCompatActivity() {
                             handlePaymentSuccess(paymentData)
                         }
                     }
+
                     RESULT_CANCELED -> {
                         Toast.makeText(this, "Payment Cancelled", Toast.LENGTH_LONG).show()
                     }
+
                     AutoResolveHelper.RESULT_ERROR -> {
                         val status = AutoResolveHelper.getStatusFromIntent(data)
-                        Toast.makeText(this, "Error: ${status?.statusMessage}", Toast.LENGTH_LONG).show()
+                        Toast.makeText(this, "Error: ${status?.statusMessage}", Toast.LENGTH_LONG)
+                            .show()
                     }
                 }
             }
         }
     }
+
 
     private fun handlePaymentSuccess(paymentData: PaymentData?) {
         val paymentInformation = paymentData?.toJson() ?: return
@@ -209,44 +216,51 @@ class Paymentpage : AppCompatActivity() {
     }
 
     private fun saveBookingDetailsToDatabase() {
-        // Check if the selectedRooms list is not null or empty
         selectedRooms?.let { rooms ->
             val userId = FirebaseAuth.getInstance().currentUser?.uid
             if (userId != null) {
-                // Save booking details under the user's node
-                val databaseRef = FirebaseDatabase.getInstance().getReference("users").child(userId).child("Bookings")
+                // Reference to the "bookings" node in Firebase
+                val bookingsRef = FirebaseDatabase.getInstance().getReference("bookings")
 
-                // Iterate through each room in the selectedRooms list
-                for (room in rooms) {
-                    // Generate a unique key for each room booking
-                    val bookingKey = databaseRef.push().key
+                // Generate a unique booking ID for the entire booking instance
+                val bookingId = bookingsRef.push().key
 
-                    if (bookingKey != null) {
-                        // Prepare the booking data for each room
-                        val bookingData = mapOf(
+                if (bookingId != null) {
+                    // Prepare a map to store all room details under this booking ID
+                    val bookingDetails = hashMapOf<String, Any?>(
+                        "userId" to userId, // Associate booking with the user
+                        "startDate" to startDate,
+                        "endDate" to endDate,
+                        "numberOfOccupants" to numberofoccupants,
+                        "numberOfRooms" to numberofrooms,
+                        "timestamp" to System.currentTimeMillis() // Add a timestamp for the booking
+                    )
+
+                    // Prepare room details as a sublist
+                    val roomDetailsList = rooms.map { room ->
+                        mapOf(
                             "roomId" to room.id,
                             "roomName" to room.name,
                             "price" to room.price,
                             "maxOccupants" to room.maxoccupants,
                             "numberOfRooms" to room.numberofrooms,
-                            "startDate" to startDate,
-                            "endDate" to endDate,
-                            "numberOfOccupants" to numberofoccupants,
-                            "roomImageURL" to room.imageURL,
-                            "timestamp" to System.currentTimeMillis() // Add a timestamp for sorting or debugging
+                            "roomImageURL" to room.imageURL
                         )
-
-                        // Save each booking under the generated unique key
-                        databaseRef.child(bookingKey).setValue(bookingData)
-                            .addOnSuccessListener {
-                                Log.d("Database", "Room '${room.name}' saved successfully!")
-                            }
-                            .addOnFailureListener { e ->
-                                Log.e("Database", "Failed to save room '${room.name}': ${e.message}")
-                            }
-                    } else {
-                        Log.e("Database", "Failed to generate a unique booking key for room '${room.name}'.")
                     }
+
+                    // Add the room details list to the booking details
+                    bookingDetails["rooms"] = roomDetailsList
+
+                    // Save the booking details under the generated booking ID
+                    bookingsRef.child(bookingId).setValue(bookingDetails)
+                        .addOnSuccessListener {
+                            Log.d("Database", "Booking saved successfully with ID: $bookingId")
+                        }
+                        .addOnFailureListener { e ->
+                            Log.e("Database", "Failed to save booking: ${e.message}")
+                        }
+                } else {
+                    Log.e("Database", "Failed to generate a unique booking ID.")
                 }
             } else {
                 Log.e("Database", "User ID is null. Cannot save booking details.")
@@ -255,6 +269,7 @@ class Paymentpage : AppCompatActivity() {
             Log.e("Database", "No rooms selected to save.")
         }
     }
+
 
 
 
@@ -324,4 +339,5 @@ class Paymentpage : AppCompatActivity() {
         }
     }
 }
+
 
