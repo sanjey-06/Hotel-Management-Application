@@ -1,8 +1,10 @@
 package com.example.hotelbooking
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
@@ -10,10 +12,14 @@ import android.widget.PopupMenu
 import android.widget.Toast
 import android.widget.VideoView
 import androidx.activity.ComponentActivity
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.messaging.FirebaseMessaging
+import java.util.concurrent.TimeUnit
 
 class Homepage : ComponentActivity() {
 
@@ -29,16 +35,17 @@ class Homepage : ComponentActivity() {
         val centerButton: Button = findViewById(R.id.centerButton)
         val videoView: VideoView = findViewById(R.id.topVideoView)
 
-// Get the dimensions of the device screen
+        // Get the dimensions of the device screen
         val displayMetrics = resources.displayMetrics
         val width = displayMetrics.widthPixels
         val height = displayMetrics.heightPixels
 
-// Update the layout parameters of the VideoView to match the screen size
+        // Update the layout parameters of the VideoView to match the screen size
         val layoutParams = videoView.layoutParams
         layoutParams.width = width
         layoutParams.height = height
         videoView.layoutParams = layoutParams
+
         // Set the video path or URI
         val videoUri =
             Uri.parse("android.resource://$packageName/raw/homepagevideo")
@@ -48,17 +55,16 @@ class Homepage : ComponentActivity() {
         videoView.setOnPreparedListener { mediaPlayer ->
             mediaPlayer.isLooping = true // Loop the video
             videoView.start()
-
         }
+
         // Navigate to Book Now Page
-        centerButton.setOnClickListener{
+        centerButton.setOnClickListener {
             navigateToBooknowpage()
         }
 
         // Initialize Firebase
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance().reference
-
 
         // BottomNavigationView setup
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomnavbar)
@@ -108,11 +114,13 @@ class Homepage : ComponentActivity() {
                 showPopupMenu(loginButton)
             }
         }
+
+        // Enqueue the periodic work request for checkout reminder
+        scheduleCheckoutReminder()
     }
 
-
     private fun navigateToBooknowpage() {
-        val intent = Intent(this,Booknowpage::class.java)
+        val intent = Intent(this, Booknowpage::class.java)
         startActivity(intent)
     }
 
@@ -192,14 +200,13 @@ class Homepage : ComponentActivity() {
         startActivity(intent)
     }
 
-    override fun onBackPressed() {
-        // Override the back button behavior to exit the app after login
-        if (auth.currentUser != null) {
-            // If the user is logged in, exit the app directly
-            finishAffinity() // Close all activities and quit the app
-        } else {
-            // If the user is not logged in, go to the previous screen (Homepage)
-            super.onBackPressed()
-        }
+    // Function to schedule checkout reminder worker
+    private fun scheduleCheckoutReminder() {
+        val workRequest = PeriodicWorkRequestBuilder<CheckoutReminderWorker>(15, TimeUnit.MINUTES)
+            .setInitialDelay(5, TimeUnit.SECONDS)  // Optional initial delay
+            .build()
+
+        WorkManager.getInstance(this).enqueue(workRequest)
+        Log.d("notfchecker", "WorkRequest scheduled for 15 minutes interval")
     }
 }

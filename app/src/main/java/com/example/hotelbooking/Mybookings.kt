@@ -7,7 +7,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.FirebaseDatabase
 
 class MyBookings : AppCompatActivity() {
@@ -19,18 +21,41 @@ class MyBookings : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.mybookings)
 
-        // Get the current logged-in user's ID
-        val userId = FirebaseAuth.getInstance().currentUser?.uid
-        if (userId == null) {
+        setupBottomNavigation()
+        val userId = getCurrentUserId()
+        if (userId != null) {
+            fetchBookingDetails(userId)
+        } else {
             Log.e("MyBookings", "User not logged in!")
             showErrorAndExit()
-            return
         }
+    }
 
-        Log.d("MyBookings", "Logged in user ID: $userId")
+    private fun setupBottomNavigation() {
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomnavbar)
+        bottomNavigationView.selectedItemId = R.id.page_2 // Highlight "My Bookings"
 
-        // Fetch booking details from the database
-        fetchBookingDetails(userId)
+        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.page_1 -> {
+                    navigateToHomepage()
+                    true
+                }
+                R.id.page_2 -> true // Stay on the current page
+                else -> false
+            }
+        }
+    }
+
+    private fun navigateToHomepage() {
+        val intent = Intent(this, Homepage::class.java)
+        startActivity(intent)
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+        finish()
+    }
+
+    private fun getCurrentUserId(): String? {
+        return FirebaseAuth.getInstance().currentUser?.uid
     }
 
     private fun fetchBookingDetails(userId: String) {
@@ -38,21 +63,20 @@ class MyBookings : AppCompatActivity() {
 
         databaseReference.get().addOnSuccessListener { snapshot ->
             if (snapshot.exists()) {
-                val bookings = mutableListOf<List<Room>>()
-                var startDate = "Unknown"
-                var endDate = "Unknown"
+                val bookingsWithDates = mutableListOf<Pair<List<Room>, Pair<String, String>>>()
 
                 for (bookingSnapshot in snapshot.children) {
                     val bookingUserId = bookingSnapshot.child("userId").getValue(String::class.java)
 
                     if (bookingUserId == userId) {
                         // Fetch booking-level data
-                        startDate = bookingSnapshot.child("startDate").getValue(String::class.java) ?: "Unknown"
-                        endDate = bookingSnapshot.child("endDate").getValue(String::class.java) ?: "Unknown"
+                        val startDate = bookingSnapshot.child("startDate").getValue(String::class.java) ?: "Unknown"
+                        val endDate = bookingSnapshot.child("endDate").getValue(String::class.java) ?: "Unknown"
 
                         // Handle the 'rooms' array inside the booking
                         val rooms = mutableListOf<Room>()
                         val roomsArray = bookingSnapshot.child("rooms")
+
                         for (roomSnapshot in roomsArray.children) {
                             val roomId = roomSnapshot.child("roomId").getValue(Int::class.java) ?: 0
                             val roomName = roomSnapshot.child("roomName").getValue(String::class.java) ?: "Unknown"
@@ -61,6 +85,19 @@ class MyBookings : AppCompatActivity() {
                             val price = roomSnapshot.child("price").getValue(Int::class.java) ?: 0
                             val numberOfRooms = roomSnapshot.child("numberOfRooms").getValue(Int::class.java) ?: 1
 
+                            // Now fetch numberOfOccupants from the booking node
+                            val numberOfOccupants = bookingSnapshot.child("numberOfOccupants").getValue(Int::class.java) ?: 0
+
+                            // Log each field to check data retrieval
+                            Log.d("MyBookings", "Room Details:")
+                            Log.d("MyBookings", "roomId: $roomId")
+                            Log.d("MyBookings", "roomName: $roomName")
+                            Log.d("MyBookings", "roomImageURL: $roomImageURL")
+                            Log.d("MyBookings", "maxOccupants: $maxOccupants")
+                            Log.d("MyBookings", "price: $price")
+                            Log.d("MyBookings", "numberOfRooms: $numberOfRooms")
+                            Log.d("MyBookings", "numberOfOccupants: $numberOfOccupants")
+
                             val room = Room(
                                 id = roomId,
                                 name = roomName,
@@ -68,21 +105,19 @@ class MyBookings : AppCompatActivity() {
                                 price = price,
                                 bookings = "",
                                 imageURL = roomImageURL,
-                                numberofoccupants = 0, // You can customize this value if needed
+                                numberofoccupants = numberOfOccupants,
                                 numberofrooms = numberOfRooms
                             )
                             rooms.add(room)
                         }
 
-                        // Add the rooms of this booking as a group to the bookings list
-                        if (rooms.isNotEmpty()) {
-                            bookings.add(rooms)
-                        }
+                        // Store the rooms and their corresponding dates as a pair
+                        bookingsWithDates.add(Pair(rooms, Pair(startDate, endDate)))
                     }
                 }
 
-                if (bookings.isNotEmpty()) {
-                    setupRecyclerView(bookings, startDate, endDate)
+                if (bookingsWithDates.isNotEmpty()) {
+                    setupRecyclerView(bookingsWithDates)
                 } else {
                     Log.e("MyBookings", "No bookings found for user: $userId")
                     showErrorAndExit()
@@ -97,24 +132,20 @@ class MyBookings : AppCompatActivity() {
         }
     }
 
-    private fun setupRecyclerView(bookings: List<List<Room>>, startDate: String, endDate: String) {
-        Log.d("MyBookings", "Setting up RecyclerView with ${bookings.size} bookings")
+
+    private fun setupRecyclerView(bookingsWithDates: List<Pair<List<Room>, Pair<String, String>>>) {
+        Log.d("MyBookings", "Setting up RecyclerView with ${bookingsWithDates.size} bookings")
 
         recyclerView = findViewById(R.id.rooms_recycler_view)
+        roomBookingAdapter = RoomBookingAdapter(bookingsWithDates)
 
-        // Initialize the RoomBookingAdapter with fetched data and pass startDate and endDate
-        roomBookingAdapter = RoomBookingAdapter(bookings, startDate, endDate)
-
-        // Set up the RecyclerView with the adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = roomBookingAdapter
     }
 
+
     private fun showErrorAndExit() {
         Toast.makeText(this, "No bookings found or error fetching data. Returning to homepage.", Toast.LENGTH_LONG).show()
-        val intent = Intent(this, Homepage::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-        startActivity(intent)
-        finish()
+        navigateToHomepage()
     }
 }

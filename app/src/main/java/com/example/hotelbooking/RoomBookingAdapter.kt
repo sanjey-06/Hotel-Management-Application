@@ -19,21 +19,27 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 
 class RoomBookingAdapter(
-    private val bookings: List<List<Room>>, // List of bookings, each booking is a list of rooms
-    private val startDate: String,
-    private val endDate: String
+    private val bookingsWithDates: List<Pair<List<Room>, Pair<String, String>>>
 ) : RecyclerView.Adapter<RoomBookingAdapter.RoomViewHolder>() {
 
+    // Flatten the bookingsWithDates list into a single list of rooms
+    private val flattenedRoomList: List<Room> = bookingsWithDates.flatMap { (rooms, _) -> rooms }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomViewHolder {
-        // Inflate the layout for each item in the RecyclerView
+        // Inflate the layout for each room item in the RecyclerView
         val view = LayoutInflater.from(parent.context).inflate(R.layout.roomlist, parent, false)
         return RoomViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: RoomViewHolder, position: Int) {
-        val room = bookings[position].first() // Assuming all rooms belong to the same booking
+        // Get the current booking and room
+        val (rooms, dates) = bookingsWithDates.find { it.first.contains(flattenedRoomList[position]) }!!
+        val (startDate, endDate) = dates
 
-        // Set the room name, number of occupants, and date range
+        // Get the room for the current position in the flattened list
+        val room = flattenedRoomList[position]
+
+        // Set the room name, number of occupants, and date range for this room
         holder.roomTypeTextView.text = room.name
         holder.dateTextView.text = "$startDate to $endDate"
         holder.occupantsTextView.text = "Occupants: ${room.numberofoccupants}"
@@ -49,9 +55,23 @@ class RoomBookingAdapter(
         holder.raiseComplaintButton.setOnClickListener {
             showComplaintDialog(holder.itemView.context)
         }
+
+        // Check if the current room is the last one in its booking
+        val isLastRoomInBooking = rooms.indexOf(room) == rooms.size - 1
+
+        // Set visibility for the separator line
+        if (isLastRoomInBooking) {
+            // Show the separator line only for the last room of each booking
+            holder.separatorLine.visibility = View.VISIBLE
+        } else {
+            // Hide the separator line for other rooms
+            holder.separatorLine.visibility = View.GONE
+        }
     }
 
-    override fun getItemCount(): Int = bookings.size
+
+
+    override fun getItemCount(): Int = flattenedRoomList.size
 
     private fun showComplaintDialog(context: Context) {
         // Create a dialog for entering a complaint
@@ -72,7 +92,7 @@ class RoomBookingAdapter(
             val complaintText = complaintEditText.text.toString()
             if (complaintText.isNotEmpty()) {
                 // Send the complaint to the database (this part will be implemented next)
-                sendComplaintToDatabase(complaintText, context)  // Pass context here
+                sendComplaintToDatabase(complaintText, context)
                 dialog.dismiss()
             } else {
                 // Show a message if the complaint is empty
@@ -152,5 +172,6 @@ class RoomBookingAdapter(
         val occupantsTextView: TextView = itemView.findViewById(R.id.occupants_text)
         val roomImageView: ImageView = itemView.findViewById(R.id.room_image_view)
         val raiseComplaintButton: Button = itemView.findViewById(R.id.raise_complaint_button)
+        val separatorLine: View = itemView.findViewById(R.id.separator_line)  // Reference to the separator line
     }
 }

@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Hotelbooking</string>
     <string name="default_web_client_id">962275669409-1b5bo1qhicueadbhi21ektmdda5chn82.apps.googleusercontent.com</string>
+
+    <string name="facebook_app_id">2818869851619901</string>
+    <string name="fb_login_protocol_scheme">fb2818869851619901</string>
+    <string name="facebook_client_token">569cc06abfcd2cb9f6eb2b4ac0cc2808</string>
+
+
 </resources>

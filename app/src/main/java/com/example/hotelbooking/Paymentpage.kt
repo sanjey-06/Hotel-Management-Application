@@ -13,6 +13,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import org.json.JSONArray
 import org.json.JSONObject
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 class Paymentpage : AppCompatActivity() {
 
@@ -274,39 +279,63 @@ class Paymentpage : AppCompatActivity() {
                 val bookingId = bookingsRef.push().key
 
                 if (bookingId != null) {
-                    // Prepare a map to store all room details under this booking ID
-                    val bookingDetails = hashMapOf<String, Any?>(
-                        "userId" to userId, // Associate booking with the user
-                        "startDate" to startDate,
-                        "endDate" to endDate,
-                        "numberOfOccupants" to numberofoccupants,
-                        "numberOfRooms" to numberofrooms,
-                        "timestamp" to System.currentTimeMillis() // Add a timestamp for the booking
-                    )
-
-                    // Prepare room details as a sublist
-                    val roomDetailsList = rooms.map { room ->
-                        mapOf(
-                            "roomId" to room.id,
-                            "roomName" to room.name,
-                            "price" to room.price,
-                            "maxOccupants" to room.maxoccupants,
-                            "numberOfRooms" to room.numberofrooms,
-                            "roomImageURL" to room.imageURL
-                        )
+                    // Update the format to match the endDate string format (e.g., "19 Feb 2025")
+                    val format = SimpleDateFormat("dd MMM yyyy", Locale.getDefault()) // Adjusted format
+                    val parsedEndDate = try {
+                        format.parse(endDate) // Ensure endDate is a String here
+                    } catch (e: ParseException) {
+                        Log.e("Database", "Failed to parse endDate: ${e.message}")
+                        null
                     }
 
-                    // Add the room details list to the booking details
-                    bookingDetails["rooms"] = roomDetailsList
+                    // If parsing was successful, generate the timestamp for 12:00 noon of the endDate
+                    val timestamp = parsedEndDate?.let {
+                        val calendar = Calendar.getInstance()
+                        calendar.time = it
+                        calendar.set(Calendar.HOUR_OF_DAY, 12)  // Set hour to 12 (noon)
+                        calendar.set(Calendar.MINUTE, 0)        // Set minute to 0
+                        calendar.set(Calendar.SECOND, 0)        // Set second to 0
+                        calendar.set(Calendar.MILLISECOND, 0)   // Set millisecond to 0
+                        calendar.timeInMillis
+                    }
 
-                    // Save the booking details under the generated booking ID
-                    bookingsRef.child(bookingId).setValue(bookingDetails)
-                        .addOnSuccessListener {
-                            Log.d("Database", "Booking saved successfully with ID: $bookingId")
+                    if (timestamp != null) {
+                        // Prepare a map to store all room details under this booking ID
+                        val bookingDetails = hashMapOf<String, Any?>(
+                            "userId" to userId, // Associate booking with the user
+                            "startDate" to startDate,
+                            "endDate" to endDate,
+                            "numberOfOccupants" to numberofoccupants,
+                            "numberOfRooms" to numberofrooms,
+                            "timestamp" to timestamp // Set timestamp to 12:00 noon on the endDate
+                        )
+
+                        // Prepare room details as a sublist
+                        val roomDetailsList = rooms.map { room ->
+                            mapOf(
+                                "roomId" to room.id,
+                                "roomName" to room.name,
+                                "price" to room.price,
+                                "maxOccupants" to room.maxoccupants,
+                                "numberOfRooms" to room.numberofrooms,
+                                "roomImageURL" to room.imageURL
+                            )
                         }
-                        .addOnFailureListener { e ->
-                            Log.e("Database", "Failed to save booking: ${e.message}")
-                        }
+
+                        // Add the room details list to the booking details
+                        bookingDetails["rooms"] = roomDetailsList
+
+                        // Save the booking details under the generated booking ID
+                        bookingsRef.child(bookingId).setValue(bookingDetails)
+                            .addOnSuccessListener {
+                                Log.d("Database", "Booking saved successfully with ID: $bookingId")
+                            }
+                            .addOnFailureListener { e ->
+                                Log.e("Database", "Failed to save booking: ${e.message}")
+                            }
+                    } else {
+                        Log.e("Database", "Failed to generate timestamp for endDate.")
+                    }
                 } else {
                     Log.e("Database", "Failed to generate a unique booking ID.")
                 }
@@ -317,6 +346,8 @@ class Paymentpage : AppCompatActivity() {
             Log.e("Database", "No rooms selected to save.")
         }
     }
+
+
 
 
 
