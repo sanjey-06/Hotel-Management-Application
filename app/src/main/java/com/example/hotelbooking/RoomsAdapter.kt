@@ -16,12 +16,9 @@ class RoomsAdapter(
     private val startDate: String?,
     private val endDate: String?,
     private val updateRoomCount: (Int) -> Unit, // Callback function to update the total rooms count
-    private val onSelectedRoomsChanged: (List<Room>) -> Unit,// Callback to notify selected rooms change
+    private val onSelectedRoomsChanged: (List<Room>) -> Unit, // Callback to notify selected rooms change
     private var maxRoomsAllowed: Int
-
 ) : RecyclerView.Adapter<RoomsAdapter.RoomViewHolder>() {
-
-
 
     inner class RoomViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val roomId: TextView = view.findViewById(R.id.roomId)
@@ -31,6 +28,7 @@ class RoomsAdapter(
         val decrementButton: AppCompatImageButton = view.findViewById(R.id.decrementRoomButton)
         val incrementButton: AppCompatImageButton = view.findViewById(R.id.incrementRoomButton)
         val roomQuantityTextView: TextView = view.findViewById(R.id.roomQuantity)
+        val soldTextView: TextView = view.findViewById(R.id.soldTextView) // TextView for Sold status
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RoomViewHolder {
@@ -52,14 +50,25 @@ class RoomsAdapter(
         // Set initial quantity in the TextView
         holder.roomQuantityTextView.text = room.numberofrooms.toString()
 
+        // If the room is sold, hide the increment/decrement buttons and show "Sold"
+        if (room.bookings == "Sold") {
+            holder.decrementButton.visibility = View.GONE
+            holder.incrementButton.visibility = View.GONE
+            holder.roomQuantityTextView.visibility= View.GONE
+            holder.soldTextView.visibility = View.VISIBLE // Show "Sold" text
+        } else {
+            holder.decrementButton.visibility = View.VISIBLE
+            holder.incrementButton.visibility = View.VISIBLE
+            holder.soldTextView.visibility = View.GONE // Hide "Sold" text
+        }
+
         // Decrement button click listener
         holder.decrementButton.setOnClickListener {
-            if (room.numberofrooms > 1) { // Prevent number going below 1
+            if (room.numberofrooms > 0) { // Allow number to go to 0
                 val updatedRoom = room.copy(numberofrooms = room.numberofrooms - 1)
                 rooms[position] = updatedRoom // Update the room in the list
                 notifyItemChanged(position) // Notify adapter to update the UI
                 updateRoomCount(getTotalRoomsSelected()) // Update total rooms count
-
 
                 // Update the selected rooms
                 onSelectedRoomsChanged(getSelectedRooms()) // Notify activity of the change
@@ -81,8 +90,6 @@ class RoomsAdapter(
             }
         }
     }
-
-
 
     private fun getTotalRoomsSelected(): Int {
         return rooms.sumOf { it.numberofrooms } // Sum up all the numberofrooms values

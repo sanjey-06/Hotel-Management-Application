@@ -14,6 +14,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class Searchingpage : AppCompatActivity() {
     private lateinit var database: DatabaseReference
@@ -89,12 +93,17 @@ class Searchingpage : AppCompatActivity() {
         // Initialize "Book Now" button
         val bookNowButton: Button = findViewById(R.id.book_now_button)
         bookNowButton.setOnClickListener {
+            // Check if the total number of rooms selected is equal to the allowed number of rooms
             if (totalRoomsSelected == 0) {
                 Toast.makeText(this, "Please select at least one room to proceed.", Toast.LENGTH_SHORT).show()
+            } else if (totalRoomsSelected != maxRoomsAllowed) {
+                // Ensure the number of selected rooms is equal to the allowed number of rooms
+                Toast.makeText(this, "Please select exactly $maxRoomsAllowed room(s) to proceed.", Toast.LENGTH_SHORT).show()
             } else {
                 checkLoginStatusAndProceed()
             }
         }
+
 
         // Initialize other buttons and bottom navigation
         val createAccountButton: Button = findViewById(R.id.createAccountButton)
@@ -189,17 +198,23 @@ class Searchingpage : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 roomList.clear()
 
+                // Log the start and end date from the BookNow page
+                val startDateParsed = startDate?.let { parseDate(it) }
+                val endDateParsed = endDate?.let { parseDate(it) }
+                Log.d("SearchingPage", "Start Date: $startDateParsed, End Date: $endDateParsed")
+
                 // Check if the user has selected 2 or more rooms
                 val displayAllRooms = rooms >= 2 // `rooms` is passed from the BookNow page
-
+                Log.d("SearchingPage", "Display all rooms: $displayAllRooms")
 
                 for (roomSnapshot in snapshot.children) {
                     val roomName = roomSnapshot.key ?: "Unknown Room"
+                    Log.d("SearchingPage", "Room Name: $roomName")
 
-                    for (subrooms in roomSnapshot.children) {
-                        val map = subrooms.getValue() as? Map<String, Any> ?: continue
+                    for (subroomSnapshot in roomSnapshot.children) {
+                        val map = subroomSnapshot.getValue() as? Map<String, Any> ?: continue
 
-                        val room = Room(
+                        var room = Room(
                             id = (map["id"] as? Long)?.toInt() ?: 0,
                             name = roomName,
                             maxoccupants = (map["maxoccupants"] as? Long)?.toInt() ?: 0,
@@ -209,23 +224,81 @@ class Searchingpage : AppCompatActivity() {
                             numberofoccupants = adults + children,
                             numberofrooms = 0 // Start with 0 rooms selected
                         )
-                        Log.d("SearchingPage", "Room price for $roomName: ${room.price}") // Log the price here
 
-                        val totalOccupants = adults + children
-                        if (displayAllRooms || room.maxoccupants >= totalOccupants) {
+                        // Log the price and bookings here
+                        Log.d("SearchingPage", "Room price for $roomName: ${room.price}, Bookings: ${room.bookings}")
+
+                        // Check if the room is available
+                        val isAvailable = isRoomAvailable(room.bookings, startDateParsed, endDateParsed)
+                        if (isAvailable) {
+                            val totalOccupants = adults + children
+                            if (displayAllRooms || room.maxoccupants >= totalOccupants) {
+                                roomList.add(room)
+                            }
+                        } else {
+                            // Room is not available, mark as sold
+                            room = room.copy(bookings = "Sold")
                             roomList.add(room)
                         }
                     }
                 }
-
-                roomsAdapter.notifyDataSetChanged()
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@Searchingpage, "Failed to load rooms: ${error.message}", Toast.LENGTH_SHORT).show()
+                Log.d("SearchingPage", "Database error: ${error.message}")
             }
         })
     }
+
+
+
+    private fun parseDate(dateString: String): Date? {
+        val dateFormat = SimpleDateFormat("dd MMM yyyy", Locale.ENGLISH)
+        return try {
+            dateFormat.parse(dateString)
+        } catch (e: ParseException) {
+            Log.e("SearchingPage", "Error parsing date: $dateString", e)
+            null
+        }
+    }
+
+
+
+    private fun isRoomAvailable(bookings: String, startDate: Date?, endDate: Date?): Boolean {
+        if (startDate == null || endDate == null || bookings.isEmpty()) {
+            return true // Room is available if no bookings are made
+        }
+
+        // Parse the booking date range (e.g., "18 Jan 2025 - 19 Jan 2025")
+        val bookingDates = bookings.split(" - ")
+        if (bookingDates.size != 2) {
+            return true // Invalid booking format, assume room is available
+        }
+
+        // Parse the booked start and end dates using the correct format
+        val bookedStartDate = parseDate(bookingDates[0])
+        val bookedEndDate = parseDate(bookingDates[1])
+
+        // Check for null after parsing the booked dates
+        if (bookedStartDate == null || bookedEndDate == null) {
+            return true // Invalid booking dates, assume room is available
+        }
+
+        // Log the parsed dates and compare them
+        Log.d("SearchingPage", "Selected start date: $startDate, Selected end date: $endDate")
+        Log.d("SearchingPage", "Booked start date: $bookedStartDate, Booked end date: $bookedEndDate")
+
+        // Compare the dates, including the exact match case
+        val isAvailable = !(startDate == bookedStartDate && endDate == bookedEndDate ||
+                startDate.before(bookedEndDate) && endDate.after(bookedStartDate))
+
+        Log.d("SearchingPage", "Is room available? $isAvailable")
+        return isAvailable
+    }
+
+
+
+
 
     private fun updateTotalPrice() {
         totalPrice = selectedRooms.sumOf { it.price * it.numberofrooms }

@@ -212,8 +212,56 @@ class Paymentpage : AppCompatActivity() {
         // Save booking details to the database
         saveBookingDetailsToDatabase()
 
+        // Store startDate and endDate in the room's booking node
+        storeBookingDatesInRooms()
+
         showPaymentSuccessDialog()
     }
+
+    private fun storeBookingDatesInRooms() {
+        selectedRooms?.let { rooms ->
+            val userId = FirebaseAuth.getInstance().currentUser?.uid
+            if (userId != null) {
+                val database = FirebaseDatabase.getInstance()
+
+                rooms.forEach { room ->
+                    // Safe call for startDate and endDate
+                    val validStartDate = startDate?.takeIf { it.isNotBlank() }
+                    val validEndDate = endDate?.takeIf { it.isNotBlank() }
+
+                    // Ensure that both startDate and endDate are valid (not null or empty)
+                    if (validStartDate != null && validEndDate != null) {
+                        // Reference to the bookings node for the specific room (use "room {roomId}" format)
+                        val roomRef = database.getReference("rooms/${room.name}/room ${room.id}/bookings")
+
+                        // Format the startDate and endDate as a single string
+                        val bookingPeriod = "$validStartDate - $validEndDate"
+
+                        // Directly update the bookings node regardless of whether it is empty or not
+                        roomRef.setValue(bookingPeriod)
+                            .addOnSuccessListener {
+                                Log.d("Firebase", "Booking period stored successfully in room ${room.name} (ID: ${room.id}).")
+                            }
+                            .addOnFailureListener { e ->
+                                Log.e("Firebase", "Failed to store booking period in room ${room.name}: ${e.message}")
+                            }
+                    } else {
+                        Log.e("Firebase", "Invalid booking dates. Start or end date is empty.")
+                    }
+                }
+            } else {
+                Log.e("Firebase", "User ID is null. Cannot store booking details.")
+            }
+        } ?: run {
+            Log.e("Firebase", "No rooms selected to store booking details.")
+        }
+    }
+
+
+
+
+
+
 
     private fun saveBookingDetailsToDatabase() {
         selectedRooms?.let { rooms ->

@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="semi_transparent">#80FFFFFF</color>
     <color name="darkish_blue">#0d4f77</color>
+    <color name="sold_red">#FF0000</color>
 </resources>
