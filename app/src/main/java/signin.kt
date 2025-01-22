@@ -36,7 +36,7 @@ class SigninActivity : ComponentActivity() {
         setContentView(R.layout.signin)
 
         // Set the Facebook app client token
-        FacebookSdk.setClientToken("8839ae20436334a006f330cc9719b94c")
+        FacebookSdk.setClientToken("Enter Your Facebook Client Token")
 
         // Initialize Facebook SDK
         FacebookSdk.sdkInitialize(applicationContext)
