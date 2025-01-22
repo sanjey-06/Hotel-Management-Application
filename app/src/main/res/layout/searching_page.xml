@@ -15,11 +15,6 @@
         android:contentDescription="Logo" />
 
     <!-- Create Account Button -->
-
-    <!-- Login Button -->
-
-    <!-- RecyclerView for Rooms -->
-
     <Button
         android:id="@+id/createAccountButton"
         android:layout_width="wrap_content"
@@ -31,9 +26,11 @@
         android:layout_toEndOf="@id/logoImageView"
         android:background="@android:color/transparent"
         android:text="Create Account"
+        android:textAllCaps="false"
         android:textColor="@color/black"
         android:textSize="15sp" />
 
+    <!-- Login Button -->
     <Button
         android:id="@+id/loginButton"
         android:layout_width="wrap_content"
@@ -44,48 +41,70 @@
         android:layout_toEndOf="@id/createAccountButton"
         android:background="@android:color/transparent"
         android:text="Login"
+        android:textAllCaps="false"
         android:textColor="@color/black"
         android:textSize="15sp" />
 
-    <!-- BottomNavigationView -->
+    <!-- RecyclerView for Rooms -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/roomsRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_above="@id/bottomnavbar"
         android:layout_below="@id/loginButton"
-        android:layout_marginTop="17dp"
-        android:layout_marginBottom="-17dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="-15dp"
         android:clipToPadding="false"
         android:padding="16dp"
         android:scrollbars="vertical" />
 
+    <!-- BottomNavigationView -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomnavbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/teal_200"
+        android:background="@color/darkish_blue"
         app:menu="@menu/bottom_navigation_menu" />
 
+    <!-- Book Now Button -->
     <Button
         android:id="@+id/book_now_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="@color/google_pay_button_color"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
         android:layout_above="@+id/bottomnavbar"
+        android:background="@drawable/btn_background"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="26dp"
         android:text="Book Now" />
 
+    <!-- Number of Rooms TextBox (Fixed at the bottom with colored background) -->
+    <LinearLayout
+        android:id="@+id/roomSelectionBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="105dp"
+        android:layout_marginBottom="80dp"
+    android:layout_toStartOf="@+id/book_now_button"
+    android:background="@color/semi_transparent"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
     <TextView
         android:id="@+id/numberofroomsselected"
-        android:layout_width="201dp"
-        android:layout_height="38dp"
-        android:layout_alignParentBottom="true"
-        android:layout_marginEnd="86dp"
-        android:layout_marginBottom="29dp"
-        android:layout_toStartOf="@+id/book_now_button"
-        android:text="No of Rooms selected" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No of Rooms selected"
+        android:textColor="@android:color/black"
+        android:textSize="16sp" />
+</LinearLayout>
 
-</RelativeLayout>
+    </RelativeLayout>

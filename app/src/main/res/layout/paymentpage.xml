@@ -21,8 +21,12 @@
 
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:id="@+id/googlepaybutton"
-        android:text="Pay with GOOGLE"/>
+        android:background="@drawable/btn_background"
+        android:backgroundTint="@color/google_pay_button_color"
+        android:text="Pay with Google"
+        android:textAllCaps="false"
+        android:textColor="@color/white"/>
 </LinearLayout>

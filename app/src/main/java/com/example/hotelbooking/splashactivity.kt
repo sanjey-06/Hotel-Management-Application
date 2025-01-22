@@ -19,7 +19,7 @@ class SplashActivity : ComponentActivity() {
         Log.d("SplashActivity", "SplashActivity started")
         setContentView(R.layout.splash_screen)
 
-        // Initialize the Preferences to ensure onboarding flag is set properly
+        // Initialize the onboarding flag on the first app launch
         PreferencesManager.initializeOnboardingFlag(this)
 
         val lottieAnimationView: LottieAnimationView = findViewById(R.id.animationView)
@@ -35,8 +35,7 @@ class SplashActivity : ComponentActivity() {
                 // Apply fade-out animation to the Lottie animation
                 val fadeOut = AlphaAnimation(1.0f, 0.0f)
                 fadeOut.duration = 1000 // 1 second duration
-                fadeOut.setAnimationListener(object :
-                    android.view.animation.Animation.AnimationListener {
+                fadeOut.setAnimationListener(object : android.view.animation.Animation.AnimationListener {
                     override fun onAnimationStart(animation: android.view.animation.Animation) {}
 
                     override fun onAnimationEnd(animation: android.view.animation.Animation) {
@@ -48,8 +47,7 @@ class SplashActivity : ComponentActivity() {
                 })
 
                 lottieAnimationView.startAnimation(fadeOut)
-                lottieAnimationView.visibility =
-                    View.INVISIBLE // Hide the Lottie animation after fading out
+                lottieAnimationView.visibility = View.INVISIBLE // Hide the Lottie animation after fading out
             }
         })
     }

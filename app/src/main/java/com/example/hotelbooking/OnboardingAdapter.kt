@@ -28,48 +28,34 @@ class OnboardingAdapter(
         holder.imageView.setImageResource(item.imageRes)
         holder.textView.text = item.text
 
-        // Show "Next" button for all pages except the last one
-        holder.nextButton.visibility = if (position == onboardingList.size - 1) {
-            View.GONE // Hide the "Next" button on the last page
-        } else {
-            View.VISIBLE // Show the "Next" button on all other pages
-        }
-
-        // Show "Finish" button only on the last page
-        holder.finishButton.visibility = if (position == onboardingList.size - 1) {
-            View.VISIBLE // Show the "Finish" button on the last page
-        } else {
-            View.GONE // Hide it on other pages
-        }
+        // Show or hide buttons based on the position (last page vs others)
+        holder.nextButton.visibility = if (position == onboardingList.size - 1) View.GONE else View.VISIBLE
+        holder.finishButton.visibility = if (position == onboardingList.size - 1) View.VISIBLE else View.GONE
 
         holder.nextButton.setOnClickListener {
             onButtonClick(position)
         }
 
-        // When Finish button is clicked, mark onboarding as completed
         holder.finishButton.setOnClickListener {
-            // Mark onboarding as completed
             PreferencesManager.setOnboardingCompleted(context, true)
-
-            // Show a Toast confirmation
             Toast.makeText(context, "Onboarding Completed!", Toast.LENGTH_SHORT).show()
-
-            // After setting the flag, navigate to Homepage
-            val intent = Intent(context, Homepage::class.java)
-            context.startActivity(intent)
-
-            // Finish the onboarding screen to prevent going back to it
-            (context as Activity).finish()
+            navigateToHomepage()
         }
     }
 
-
     override fun getItemCount(): Int = onboardingList.size
+
+    private fun navigateToHomepage() {
+        val intent = Intent(context, Homepage::class.java)
+        context.startActivity(intent)
+        // Finish the onboarding screen to prevent going back
+        (context as Activity).finish()
+    }
 
     inner class OnboardingViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.onboardingImageView)
         val textView: TextView = itemView.findViewById(R.id.onboardingTextView)
         val nextButton: MaterialButton = itemView.findViewById(R.id.onboardingNextButton)
-        val finishButton: MaterialButton = itemView.findViewById(R.id.onboardingFinishButton) // New Finish button
+        val finishButton: MaterialButton = itemView.findViewById(R.id.onboardingFinishButton)
     }
 }

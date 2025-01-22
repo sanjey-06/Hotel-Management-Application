@@ -53,18 +53,21 @@
     </RelativeLayout>
 
     <!-- Center Button over the video -->
+
+    <!-- Bottom Navigation Bar over the VideoView -->
     <Button
         android:id="@+id/centerButton"
-        android:layout_width="250dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:background="@drawable/btn_background"
+        android:backgroundTint="@color/darkish_blue"
+        android:fontFamily="@font/londrina_solid_black"
         android:text="Book Now"
-        android:background="@android:color/transparent"
-        android:fontFamily="@font/advent_pro_extrabold"
+        android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="30sp" />
 
-    <!-- Bottom Navigation Bar over the VideoView -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomnavbar"
         android:layout_width="match_parent"

@@ -1,133 +1,132 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
-
+    <!-- Logo -->
     <ImageView
         android:id="@+id/logoImageView"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_margin="16dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/hotellogo"
-        android:contentDescription="Logo" />
-
-    <Button
-        android:id="@+id/loginButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:text="Login"
-        android:textSize="15sp"
-        android:background="@android:color/transparent"
-        android:textColor="@color/black" />
+        android:src="@drawable/hotellogo"
+        android:contentDescription="Logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <!-- Create Account Button -->
     <Button
         android:id="@+id/createAccountButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toStartOf="@id/loginButton"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:text="Create Account"
         android:textSize="15sp"
         android:background="@android:color/transparent"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="@id/logoImageView"
+        app:layout_constraintBottom_toBottomOf="@id/logoImageView"
+        app:layout_constraintEnd_toStartOf="@id/loginButton" />
 
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/datePicker"
+    <!-- Login Button -->
+    <Button
+        android:id="@+id/loginButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="171dp"
-        android:layout_marginEnd="235dp"
+        android:layout_marginEnd="16dp"
+        android:text="Login"
+        android:textSize="15sp"
+        android:background="@android:color/transparent"
+        android:textColor="@color/black"
+        app:layout_constraintTop_toTopOf="@id/logoImageView"
+        app:layout_constraintBottom_toBottomOf="@id/logoImageView"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Date Picker Button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/datePicker"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="150dp"
         android:text="Choose the dates"
         android:textAllCaps="false"
         android:padding="16dp"
         android:background="@drawable/btn_background"
-        android:textSize="16dp"
-        app:backgroundTint="@color/darkish_blue" />
+        app:backgroundTint="@color/darkish_blue"
+        app:layout_constraintEnd_toStartOf="@id/selectedDate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/logoImageView" />
 
+    <!-- Selected Date TextView -->
     <TextView
         android:id="@+id/selectedDate"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="182dp"
-        android:layout_marginEnd="35dp"
-        android:padding="16dp"
-        android:background="@android:drawable/editbox_background"
-        android:hint="Selected Date Range"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="8dp"
+    android:background="@android:drawable/editbox_background"
+    android:hint="Selected Date Range"
+    android:padding="16dp"
+    android:textAlignment="center"
+    android:textColor="@color/black"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/datePicker"
+    app:layout_constraintTop_toTopOf="@id/datePicker" />
 
+    <!-- Occupants Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/occupants"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="37dp"
-        android:layout_marginTop="312dp"
-        android:layout_marginEnd="266dp"
-        android:background="@drawable/btn_background"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="30dp"
+        android:text="Choose details"
+        android:textAllCaps="false"
         android:padding="16dp"
-        android:text="Click Here"
-        app:backgroundTint="@color/darkish_blue" />
+        android:background="@drawable/btn_background"
+        app:backgroundTint="@color/darkish_blue"
+        app:layout_constraintEnd_toStartOf="@id/selectedOccupants"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/datePicker" />
 
+    <!-- Selected Occupants TextView -->
     <TextView
         android:id="@+id/selectedOccupants"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="320dp"
-        android:layout_marginEnd="15dp"
-        android:background="@android:drawable/editbox_background"
-        android:hint="Selected number of occupants"
-        android:padding="16dp"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="8dp"
+    android:background="@android:drawable/editbox_background"
+    android:hint="Selected number of occupants"
+    android:padding="16dp"
+    android:textAlignment="center"
+    android:textColor="@color/black"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/occupants"
+    app:layout_constraintTop_toTopOf="@id/occupants" />
 
+    <!-- Search Button -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/searchbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="465dp"
-        android:layout_marginEnd="164dp"
+        android:layout_marginTop="50dp"
         android:text="Search"
-        app:backgroundTint="@color/darkish_blue"
         android:padding="16dp"
         android:background="@drawable/btn_background"
-        android:textSize="15sp" />
+        app:backgroundTint="@color/darkish_blue"
+        app:layout_constraintTop_toBottomOf="@id/occupants"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Bottom Navigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomnavbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:background="@color/darkish_blue"
+        app:menu="@menu/bottom_navigation_menu"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-        android:background="@color/teal_200"
-        app:menu="@menu/bottom_navigation_menu" />
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

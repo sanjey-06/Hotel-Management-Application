@@ -3,7 +3,7 @@
 
     <!-- Default App Theme -->
     <style name="Theme.Hotelbooking" parent="android:Theme.Material.Light.NoActionBar">
-        <!-- Add any additional customization for your main app theme here -->
+        <item name="android:windowBackground">@color/white</item>
     </style>
 
     <style name="MaterialCalendarTheme" parent="ThemeOverlay.MaterialComponents.MaterialCalendar">

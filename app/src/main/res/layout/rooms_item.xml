@@ -32,13 +32,13 @@
         android:textColor="@android:color/darker_gray"
         android:paddingTop="4dp" />
 
-    <!-- TextView for Room Description -->
-    <TextView
-        android:id="@+id/roomDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Description"
-        android:paddingTop="4dp" />
+<!--    &lt;!&ndash; TextView for Room Description &ndash;&gt;-->
+<!--    <TextView-->
+<!--        android:id="@+id/roomDescription"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Description"-->
+<!--        android:paddingTop="4dp" />-->
 
     <!-- Horizontal Layout for Price and Book Now Button -->
     <LinearLayout

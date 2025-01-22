@@ -30,6 +30,10 @@
     <!-- Next Button to move to the next screen -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/onboardingNextButton"
+        android:background="@drawable/btn_background"
+        android:backgroundTint="@color/darkish_blue"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Next"
@@ -43,6 +47,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Finish"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:background="@drawable/btn_background"
+        android:backgroundTint="@color/darkish_blue"
         android:visibility="gone"
     app:layout_constraintTop_toBottomOf="@id/onboardingTextView"
     app:layout_constraintStart_toStartOf="parent"

@@ -2,6 +2,8 @@ package com.example.hotelbooking
 
 import android.app.Dialog
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
@@ -69,41 +71,47 @@ class Booknowpage : AppCompatActivity() {
 
         val createAccountButton: Button = findViewById(R.id.createAccountButton)
         val loginButton: Button = findViewById(R.id.loginButton)
+        setupBottomNavigation()
+
 
         // Calculate the number of occupants (adults + children)
         val numberofoccupants = adults + children
 
 
 
-        // BottomNavigationView setup
-        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomnavbar)
-
-        // Remove highlighting for the home icon
-        bottomNavigationView.menu.findItem(R.id.page_1).isCheckable = false
-
-        // Handle navigation item selection
-        bottomNavigationView.setOnNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.page_1 -> {
-                    val intent = Intent(this, Homepage::class.java)
-                    startActivity(intent)
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-                    finish() // Close current activity
-                    true
-                }
-
-                R.id.page_2 -> {
-                    // Redirect to MyBookings activity
-                    val intent = Intent(this, MyBookings::class.java)
-                    startActivity(intent)
-                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
-                    finish() // Close current activity
-                    true
-                }
-
-                else -> false
-            }
-        }
+//        // BottomNavigationView setup
+//        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomnavbar)
+//
+//// Set icon and text color to white for all items
+//        bottomNavigationView.itemIconTintList = ColorStateList.valueOf(Color.WHITE)
+//        bottomNavigationView.itemTextColor = ColorStateList.valueOf(Color.WHITE)
+//
+//// Remove background highlighting and ripple effect
+//        bottomNavigationView.itemBackgroundResource = android.R.color.transparent
+//
+//// Disable ripple effect around icons
+//        bottomNavigationView.setOnItemSelectedListener { item ->
+//            when (item.itemId) {
+//                R.id.page_1 -> {
+//                    val intent = Intent(this, Homepage::class.java)
+//                    startActivity(intent)
+//                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+//                    finish() // Close current activity
+//                    true
+//                }
+//
+//                R.id.page_2 -> {
+//                    // Redirect to MyBookings activity
+//                    val intent = Intent(this, MyBookings::class.java)
+//                    startActivity(intent)
+//                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+//                    finish() // Close current activity
+//                    true
+//                }
+//
+//                else -> false
+//            }
+//        }
 
         // Check if the user is logged in and confirm its validity
         val currentUser = auth.currentUser
@@ -127,6 +135,35 @@ class Booknowpage : AppCompatActivity() {
             }
         }
     }
+
+    private fun setupBottomNavigation() {
+            val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottomnavbar)
+            // Set icon and text color to white for all items
+            bottomNavigationView.itemIconTintList = ColorStateList.valueOf(Color.WHITE)
+            bottomNavigationView.itemTextColor = ColorStateList.valueOf(Color.WHITE)
+
+// Remove background highlighting and ripple effect
+            bottomNavigationView.itemBackgroundResource = android.R.color.transparent
+            bottomNavigationView.setOnNavigationItemSelectedListener { item ->
+                when (item.itemId) {
+                    R.id.page_1 -> {
+                        val intent = Intent(this, Homepage::class.java)
+                        startActivity(intent)
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+                        finish()
+                        true
+                    }
+                    R.id.page_2 -> {
+                        val intent = Intent(this, MyBookings::class.java)
+                        startActivity(intent)
+                        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
+                        finish()
+                        true
+                    }
+                    else -> false
+                }
+            }
+           }
 
 //
 //    private fun navigateToPaymentPage() {
@@ -156,7 +193,10 @@ class Booknowpage : AppCompatActivity() {
             .addOnSuccessListener { snapshot ->
                 val firstName = snapshot.value as? String
                 if (firstName != null) {
+
                     loginButton.text = firstName
+                    // Convert the first name to uppercase using uppercase() method
+                    loginButton.text = firstName.uppercase(Locale.getDefault())
                     createAccountButton.visibility = View.GONE
                     loginButton.setOnClickListener {
                         showPopupMenu(loginButton)

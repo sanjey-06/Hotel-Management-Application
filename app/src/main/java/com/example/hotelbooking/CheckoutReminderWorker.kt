@@ -11,9 +11,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.messaging.FirebaseMessaging
 import android.util.Log
-import kotlinx.coroutines.*
-import java.text.SimpleDateFormat
-import java.util.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseReference
 
 class CheckoutReminderWorker(appContext: Context, workerParams: WorkerParameters) :
     Worker(appContext, workerParams) {
@@ -53,12 +52,12 @@ class CheckoutReminderWorker(appContext: Context, workerParams: WorkerParameters
                                 Log.d("notfchecker", "Current Time: $currentTime, Reminder Time: $reminderTime, End Time: $endTimestamp")
 
                                 // Send "Booking Ending Soon" notification if the current time is within 30 seconds of the reminder time
-                                if (currentTime in (reminderTime - 30000)..(reminderTime + 30000)) { // ±30 seconds range for precision
+                                if (currentTime in (reminderTime - 30000)..(reminderTime + 30000)) {
                                     sendNotification("Booking Reminder", "Your booking is ending soon!")
                                 }
 
                                 // Send "Booking Ended" notification when the booking time has passed
-                                if (currentTime in (endTimestamp - 30000)..(endTimestamp + 30000)) { // ±30 seconds range for precision
+                                if (currentTime in (endTimestamp - 30000)..(endTimestamp + 30000)) {
                                     sendNotification("Booking Ended", "Your booking has ended. Please check out.")
 
                                     // Remove the booking data after the time ends
@@ -78,6 +77,9 @@ class CheckoutReminderWorker(appContext: Context, workerParams: WorkerParameters
                                         .addOnFailureListener { exception ->
                                             Log.e("notfchecker", "Failed to remove FCM Token: ${exception.message}")
                                         }
+
+                                    // Now remove booking from the rooms node
+                                    removeBookingFromRoom(bookingSnapshot)
                                 }
                             }
                         }
@@ -92,6 +94,39 @@ class CheckoutReminderWorker(appContext: Context, workerParams: WorkerParameters
 
         return Result.success()
     }
+
+    private fun removeBookingFromRoom(bookingSnapshot: DataSnapshot) {
+        val roomsRef = FirebaseDatabase.getInstance().getReference("rooms")
+
+        // Fetching all rooms from Firebase
+        roomsRef.get().addOnSuccessListener { roomsSnapshot ->
+            roomsSnapshot.children.forEach { roomSnapshot ->
+                val roomName = roomSnapshot.key // This should be the room name (e.g., deluxe double room)
+                val roomBookingsRef = roomSnapshot.child("bookings")
+
+                roomBookingsRef.children.forEach { roomBookingSnapshot ->
+                    // Match booking with the specific booking snapshot
+                    val bookingDate = roomBookingSnapshot.value as? String
+                    val bookingId = roomBookingSnapshot.key // Assuming each booking has a unique ID
+
+                    if (bookingDate == bookingSnapshot.child("bookingDate").value) {
+                        // Ensure `roomBookingsRef` is a `DatabaseReference`
+                        val bookingRef = roomSnapshot.child("bookings").child(bookingId ?: "")
+                        if (bookingRef is DatabaseReference) {
+                            bookingRef.removeValue()
+                                .addOnSuccessListener {
+                                    Log.d("notfchecker", "Booking removed from room $roomName")
+                                }
+                                .addOnFailureListener { exception ->
+                                    Log.e("notfchecker", "Failed to remove booking from room $roomName: ${exception.message}")
+                                }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
     private fun sendNotification(title: String, body: String) {
         val notificationManager =

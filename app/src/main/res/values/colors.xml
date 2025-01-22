@@ -10,4 +10,8 @@
     <color name="semi_transparent">#80FFFFFF</color>
     <color name="darkish_blue">#0d4f77</color>
     <color name="sold_red">#FF0000</color>
+        <color name="google_pay_button_color">#4285F4</color> <!-- Google's blue color -->
+        <color name="google_pay_icon_color">#FFFFFF</color> <!-- White color for the icon -->
+        <color name="google_pay_button_border_color">#4285F4</color> <!-- Border color matching the button color -->
+
 </resources>
